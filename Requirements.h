@@ -1,10 +1,11 @@
 #define REQUIREMENTS_H
 #ifndef REQUIREMENTS_H
-
+/*
 struct node{
 	string keyWord;
 	node *next;
 };
+*/
 
 class Requirements{
 	public:
