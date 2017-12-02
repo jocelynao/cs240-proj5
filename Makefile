@@ -1,16 +1,16 @@
 all:	driver
 
-driver:	driver.o Requirements.o requirements_parser.o 
-	g++ driver.o Requirements.o requirements_parser.o -o schedule.exe
+driver:	driver.o offeringsObj.o	offeringsParser.o
+	g++ driver.o offeringsObj.o offeringsParser.o -o schedule.exe
 
 driver.o: driver.cpp
 	g++ -c driver.cpp
 
-Requirements.o:	Requirements.cpp Requirements.h
-	g++ -c Requirements.cpp
+offeringsObj.o:	offeringsObj.cpp offeringsObj.h
+	g++ -c offeringsObj.cpp
 
-requirements_parser.o: requirements_parser.cpp Requirements.h requirements_parser.h
-	g++ -c requirements_parser.cpp
+offeringsParser.o: offeringsParser.cpp offeringsParser.h
+	g++ -c offeringsParser.cpp
 
 clean:
 	rm -f *.o schedule.exe

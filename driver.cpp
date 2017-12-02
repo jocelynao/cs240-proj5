@@ -2,8 +2,6 @@
 #include <stdlib.h>
 #include <sstream>
 #include <string>
-#include "Requirements.h"
-#include "requirements_parser.h"
 
 using namespace std;
 
