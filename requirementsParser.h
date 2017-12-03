@@ -11,7 +11,7 @@ using namespace std;
 class requirementsParser{
 	public:
 		requirementsParser(string fileName);
-		requirements getRequirements();
+		requirements *getRequirements();
 	private:
 		requirements *myRequirements;
 };

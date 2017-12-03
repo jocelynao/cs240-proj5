@@ -22,11 +22,11 @@ requirementsParser::requirementsParser(string fileName){
 			reqLine.push_back(temp1);
 		}
 		myRequirements -> menu(reqLine);
-		reqLine.clear()
+		reqLine.clear();
 	}
 
 }
 
-requirements getRequirements(){
+requirements* requirementsParser::getRequirements(){
 	return myRequirements;
 }
