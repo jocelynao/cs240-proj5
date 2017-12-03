@@ -8,6 +8,8 @@ using namespace std;
 void requirements:: menu(vector<string> vec){
 	if (vec[0] == "TOTAL"){
 		setTotal(stoi(vec[1]));
+		cout << getTotal() << endl;
+
 	}
 	else if(vec[0] == "CREDIT"){
 		credit newCred(vec[1], stoi(vec[2]));
@@ -23,13 +25,14 @@ void requirements:: menu(vector<string> vec){
 
 void requirements:: findLL(vector<string> vec){
 	int size = vec.size();
-	if (size > 3){
+
+/*	if (size > 3){
 		cout << "e" << endl;
 	}
 	else{
 		courseLL *newCLL = new courseLL;
 	//	newCLL(vec[1]);
-	}
+	}*/
 }
 
 void requirements:: setTotal(int n){

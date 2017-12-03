@@ -8,6 +8,7 @@
 #include <sys/stat.h>
 #include "offeringsParser.h"
 #include "plannedObj.h"
+#include "requirementsParser.h"
 
 using namespace std;
 
@@ -28,6 +29,8 @@ int main(int argc, char **argv){
 			}
 		}
 
+		requirementsParser *parser = new requirementsParser(argv[1]);
+		/*
 		unordered_map<string, offerings*> offersMap;
 		offeringsParser *offers = new offeringsParser(argv[2]);
 		offersMap = offers -> getMap();
@@ -47,6 +50,7 @@ int main(int argc, char **argv){
 			cout << *iter << ", "; 
 		}
 		cout << endl;
+		*/
 		
 	}
 	return 0;
