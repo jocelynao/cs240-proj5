@@ -8,19 +8,11 @@
 using namespace std;
 
 offeringsParser::offeringsParser(string fileName){
-	bool exists = false;
-	struct stat b;
-	exists = (stat(fileName.c_str(), &b) == 0);
-	if(exists){
-		ifstream file(fileName);
-		string str;
-		while(getline(file, str)){
-			offerings *offered = new offerings(str);
-			offeringsMap.insert(make_pair(offered -> getClass(), offered));	
-		}
-	}else{
-		cout << "File " << fileName << " could not be found!" << endl;
-		exit(0);
+	ifstream file(fileName);
+	string str;
+	while(getline(file, str)){
+		offerings *offered = new offerings(str);
+		offeringsMap.insert(make_pair(offered -> getClass(), offered));	
 	}
 }
 

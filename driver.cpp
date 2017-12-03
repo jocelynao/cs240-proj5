@@ -4,6 +4,8 @@
 #include <string>
 #include <vector>
 #include <unordered_map>
+#include <fstream>
+#include <sys/stat.h>
 #include "offeringsParser.h"
 #include "plannedObj.h"
 
@@ -13,6 +15,19 @@ int main(int argc, char **argv){
 	if(argc != 4){
 		cout << "Please run the program as follows: ./schedule.exe <Requirements File> <Offerings File> <Planned Schedule File>" << endl;
 	}else{
+		
+		bool exists = false;
+		struct stat b;
+		string fileName;
+		for(int i = 1; i < 4; i++){
+			fileName = argv[i];
+			exists = (stat(fileName.c_str(), &b) == 0);
+			if(!exists){
+				cout << "File " << fileName << " could not be found!" << endl;
+				exit(0);
+			}
+		}
+
 		unordered_map<string, offerings*> offersMap;
 		offeringsParser *offers = new offeringsParser(argv[2]);
 		offersMap = offers -> getMap();
