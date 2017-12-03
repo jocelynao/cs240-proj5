@@ -1,5 +1,6 @@
 #include <string>
 #include <iostream>
+#include "credit.h"
 
 using namespace std;
 
@@ -16,10 +17,10 @@ void credit:: setNum(int num){
 	credNum = num;
 }
 
-void getName(){
+string credit:: getName(){
 	return credName;
 }
 
-void getNum(){
+int credit:: getNum(){
 	return credNum;
 }

@@ -1,7 +1,11 @@
 #include <string>
 #include <iostream>
+#include "course.h"
 
 using namespace std;
+
+course:: course(){
+}
 
 course:: course(string n, string s){
 	courseName = n;
@@ -16,10 +20,10 @@ void course:: setStatus(string s){
 	status = s;
 }
 
-string getName(){
+string course:: getName(){
 	return courseName;
 }
 
-string getStatus(){
+string course:: getStatus(){
 	return status;
 }

@@ -7,9 +7,11 @@ using namespace std;
 
 class course{
 	private:
-		string courseName;
-		string status;
+		string courseName = "";
+		string status = "";
 	public:
+		course();	
+
 		course(string n, string s);
 		void setName(string n);
 		void setStatus(string s);
