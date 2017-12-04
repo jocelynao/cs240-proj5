@@ -27,7 +27,9 @@ void requirements:: findLL(vector<string> vec){
 	int size = vec.size();
 	courseLL *newCLL = new courseLL;
 	vector<string>::iterator iter;
-	
+/*	for (it = adjVecCourses.begin(); it != adjVecCourses.end(); it++){
+
+	}*/
 	if (size > 3){
 		cout << "e" << endl;
 	}
