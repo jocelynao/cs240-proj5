@@ -22,7 +22,10 @@ requirementsParser::requirementsParser(string fileName){
 			reqLine.push_back(temp1);
 		}
 		vector<string>::iterator iter;
-
+		for(iter = reqLine.begin(); iter != reqLine.end(); iter++){
+			cout << *iter << " ";
+		}
+		cout << endl << endl;
 		myRequirements -> menu(reqLine);
 		reqLine.clear();
 	}
