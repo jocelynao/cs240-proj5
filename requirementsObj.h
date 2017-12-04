@@ -18,6 +18,8 @@ class requirements{
 		void menu(vector<string> vec);
 		void insertLL(vector<string> vec);
 
+		void printAdjVec();
+
 		void setTotal(int n);
 		int getTotal();	
 };

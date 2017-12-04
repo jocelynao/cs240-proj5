@@ -8,12 +8,18 @@ using namespace std;
 void requirements:: menu(vector<string> vec){
 	if (vec[0] == "TOTAL"){
 		setTotal(stoi(vec[1]));
-		cout << getTotal() << endl;
+	//	cout << getTotal() << endl;
 
 	}
 	else if(vec[0] == "CREDIT"){
 		credit newCred(vec[1], stoi(vec[2]));
 		creds.push_back(newCred);
+	//	vector<credit>:: iterator cIter;
+	/*	for (cIter = creds.begin(); cIter != creds.end(); cIter++){
+			cout << cIter -> getName() << ", ";
+		}
+		cout << "\n" << endl;*/
+
 	}
 	else if(vec[0] == "COURSE"){
 		insertLL(vec);		
@@ -39,7 +45,19 @@ void requirements:: insertLL(vector<string> vec){
 		}
 		i++;
 	}
-	cout << newCLL -> getHead() << endl;
+	cout << newCLL -> getHeadCourse() << endl;
+}
+
+void requirements:: printAdjVec(){
+	vector<courseLL>:: iterator iter;
+	for (iter = adjVecCourses.begin(); iter != adjVecCourses.end(); iter++){
+		node *nodePtr = iter -> getHead();
+		for (int i = 0; i < iter -> getLength(); i++){		
+			cout << nodePtr -> courseObj.getName() << ", ";
+		}
+		cout << "\n" << endl;
+	//	cout << iter -> getHead() << endl; 
+	}
 }
 
 void requirements:: setTotal(int n){

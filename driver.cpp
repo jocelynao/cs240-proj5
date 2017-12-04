@@ -30,6 +30,7 @@ int main(int argc, char **argv){
 		}
 
 		requirementsParser *parser = new requirementsParser(argv[1]);
+		(parser -> getRequirements()) -> printAdjVec();
 		/*
 		unordered_map<string, offerings*> offersMap;
 		offeringsParser *offers = new offeringsParser(argv[2]);

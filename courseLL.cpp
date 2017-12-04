@@ -2,10 +2,6 @@
 #include <string>
 #include "courseLL.h"
 
-string courseLL:: getHead(){
-	return head -> courseObj.getName();
-}
-
 void courseLL:: insert(string name, string s){	
 	course newCourse(name, s);
 	node newNode;
@@ -24,6 +20,18 @@ void courseLL:: insert(string name, string s){
 		tail = &newNode;
 	}
 	length = length + 1;	
+}
+
+node*& courseLL:: getHead(){
+	return head;
+}
+
+string courseLL:: getHeadCourse(){
+	return head -> courseObj.getName();
+}
+
+int courseLL::getLength(){
+	return length;
 }
 
 courseLL:: ~courseLL(){

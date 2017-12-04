@@ -19,8 +19,12 @@ class courseLL{
 		node *tail;
 		int length = 0;
 	public:
-		string getHead();
 		void insert(string name, string s);
+
+		node*& getHead();
+		string getHeadCourse();
+		int getLength();
+
 		~courseLL();
 };
 
