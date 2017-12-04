@@ -26,6 +26,7 @@ void requirements:: menu(vector<string> vec){
 void requirements:: insertLL(vector<string> vec){
 	courseLL *newCLL = new courseLL;
 	vector<string>::iterator iter;
+<<<<<<< HEAD
 	int i = 0;
 	for(iter = vec.begin(); iter != vec.end(); iter++){
 		if(i != 0){
@@ -38,6 +39,16 @@ void requirements:: insertLL(vector<string> vec){
 			}
 		}
 		i++;
+=======
+/*	for (it = adjVecCourses.begin(); it != adjVecCourses.end(); it++){
+
+	}*/
+	if (size > 3){
+		cout << "e" << endl;
+	}
+	else{
+
+>>>>>>> 9c131981423b3241dc5bbfaa51cfa71dda13961a
 	}
 	/*cout << newCLL -> getHead() << endl;*/
 	cout << endl << endl << endl;
