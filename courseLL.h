@@ -19,7 +19,7 @@ class courseLL{
 		node *tail;
 		int length = 0;
 	public:
-		node*& getHead();
+		string getHead();
 		void insert(string name, string s);
 		~courseLL();
 };

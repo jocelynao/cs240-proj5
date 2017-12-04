@@ -2,7 +2,7 @@
 #include <string>
 #include "courseLL.h"
 
-node*& courseLL:: getHead(){
+string courseLL:: getHead(){
 	return head;
 }
 

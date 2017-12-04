@@ -25,14 +25,15 @@ void requirements:: menu(vector<string> vec){
 
 void requirements:: findLL(vector<string> vec){
 	int size = vec.size();
-
-/*	if (size > 3){
+	courseLL *newCLL = new courseLL;
+	vector<string>::iterator iter;
+	
+	if (size > 3){
 		cout << "e" << endl;
 	}
 	else{
-		courseLL *newCLL = new courseLL;
-	//	newCLL(vec[1]);
-	}*/
+
+	}
 }
 
 void requirements:: setTotal(int n){
