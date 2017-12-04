@@ -1,7 +1,7 @@
 all:	driver
 
-driver:	driver.o offeringsObj.o	offeringsParser.o plannedObj.o course.o credit.o courseLL.o requirementsObj.o requirementsParser.o 
-	g++ driver.o offeringsObj.o offeringsParser.o plannedObj.o course.o credit.o courseLL.o requirementsObj.o requirementsParser.o -o schedule.exe
+driver:	driver.o offeringsObj.o	offeringsParser.o plannedObj.o course.o credit.o courseNode.o requirementsObj.o requirementsParser.o 
+	g++ driver.o offeringsObj.o offeringsParser.o plannedObj.o course.o credit.o courseNode.o requirementsObj.o requirementsParser.o -o schedule.exe
 
 driver.o: driver.cpp
 	g++ -c driver.cpp
@@ -21,8 +21,8 @@ course.o: course.cpp course.h
 credit.o: credit.cpp credit.h
 	g++ -c credit.cpp
 
-courseLL.o: courseLL.cpp courseLL.h
-	g++ -c courseLL.cpp
+courseNode.o: courseNode.cpp courseNode.h
+	g++ -c courseNode.cpp
 
 requirementsObj.o:: requirementsObj.cpp requirementsObj.h
 	g++ -c requirementsObj.cpp

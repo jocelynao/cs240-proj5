@@ -5,7 +5,7 @@
 #include <unordered_map>
 #include <vector>
 #include "credit.h"
-#include "courseLL.h"
+#include "courseNode.h"
 
 using namespace std;
 
@@ -13,11 +13,11 @@ class requirements{
 	private:
 		int total;
 		vector<credit> creds;
-		vector<courseLL> adjVecCourses;
+		vector<node> adjVecCourses;
 	public:
 		void menu(vector<string> vec);
-		void insertLL(vector<string> vec);
-
+		void makeNode(vector<string> vec);
+		void setCourses(vector<string> reqLine);
 		void printAdjVec();
 
 		void setTotal(int n);

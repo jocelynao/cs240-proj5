@@ -21,12 +21,12 @@ requirementsParser::requirementsParser(string fileName){
 		while(s >> temp1){
 			reqLine.push_back(temp1);
 		}
-		vector<string>::iterator iter;
+	/*	vector<string>::iterator iter;
 		for(iter = reqLine.begin(); iter != reqLine.end(); iter++){
 			cout << *iter << " ";
 		}
-		cout << endl << endl;
-		myRequirements -> menu(reqLine);
+		cout << endl << endl;*/
+		myRequirements -> setCourses(reqLine);
 		reqLine.clear();
 	}
 
