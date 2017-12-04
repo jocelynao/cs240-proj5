@@ -21,6 +21,8 @@ requirementsParser::requirementsParser(string fileName){
 		while(s >> temp1){
 			reqLine.push_back(temp1);
 		}
+		vector<string>::iterator iter;
+
 		myRequirements -> menu(reqLine);
 		reqLine.clear();
 	}

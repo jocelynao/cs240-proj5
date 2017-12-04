@@ -3,7 +3,7 @@
 #include "courseLL.h"
 
 string courseLL:: getHead(){
-	return head;
+	return head -> courseObj.getName();
 }
 
 void courseLL:: insert(string name, string s){	

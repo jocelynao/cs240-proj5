@@ -15,25 +15,32 @@ void requirements:: menu(vector<string> vec){
 		credit newCred(vec[1], stoi(vec[2]));
 		creds.push_back(newCred);
 	}
-/*	else if(arr[0] == "COURSE"){
-		
-	}*/
+	else if(vec[0] == "COURSE"){
+		insertLL(vec);		
+	}
 	else{
 		cout << "HI" << endl;
 	}
 }
 
-void requirements:: findLL(vector<string> vec){
-	int size = vec.size();
+void requirements:: insertLL(vector<string> vec){
 	courseLL *newCLL = new courseLL;
 	vector<string>::iterator iter;
-	
-	if (size > 3){
-		cout << "e" << endl;
+	int i = 0;
+	for(iter = vec.begin(); iter != vec.end(); iter++){
+		if(i != 0){
+			if(i == 1){
+				newCLL -> insert(vec[i], vec[i+1]);
+			}else{
+				if(i != 2){
+					newCLL -> insert(vec[i], "");
+				}
+			}
+		}
+		i++;
 	}
-	else{
-
-	}
+	/*cout << newCLL -> getHead() << endl;*/
+	cout << endl << endl << endl;
 }
 
 void requirements:: setTotal(int n){

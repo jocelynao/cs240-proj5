@@ -16,7 +16,7 @@ class requirements{
 		vector<courseLL> adjVecCourses;
 	public:
 		void menu(vector<string> vec);
-		void findLL(vector<string> vec);
+		void insertLL(vector<string> vec);
 
 		void setTotal(int n);
 		int getTotal();	
