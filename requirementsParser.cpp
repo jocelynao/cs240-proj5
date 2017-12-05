@@ -41,6 +41,7 @@ requirementsParser::requirementsParser(string fileName){
 		myRequirements -> addReqs(*iter);
 	}
 	myRequirements -> printAdjVec();
+	delete myRequirements;
 
 }
 
