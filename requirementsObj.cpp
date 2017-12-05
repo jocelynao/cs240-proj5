@@ -2,6 +2,7 @@
 #include <string>
 #include <vector>
 #include "requirementsObj.h"
+#include "courseNode.h"
 
 using namespace std;
 
@@ -22,12 +23,30 @@ void requirements:: setCourses(vector<string> reqLine){
 
 	}
 	else if(reqLine[0] == "COURSE"){
-	//	cout << "hello" << endl;
-		makeNode(reqLine);		
+		if(!alreadyIn(reqLine)){
+			makeNode(reqLine);
+			cout << reqLine[1] << " inserted." << endl;
+		}else{
+			cout << reqLine[1] << " already found." << endl;
+		}		
 	}
 	else{
 		cout << "HI" << endl;
 	}
+}
+
+bool requirements::alreadyIn(vector<string> vec){
+	vector<node>::iterator iter;
+	cout << adjVecCourses.size() << endl;
+	for (iter = adjVecCourses.begin(); iter != adjVecCourses.end(); iter++){
+		
+		string test = iter -> getCourse();
+		if(test.compare(vec[1]) == 0){
+			return true;
+		}
+	}
+
+	return false;
 }
 
 void requirements:: makeNode(vector<string> vec){
@@ -144,6 +163,16 @@ void requirements:: addReqs(vector<string> reqLine){
 }
 */
 void requirements:: printAdjVec(){
+	
+	cout << "------------------------------------------" << endl;
+	vector<node>:: iterator iter;
+	for (iter = adjVecCourses.begin(); iter != adjVecCourses.end(); iter++){
+		string test = iter -> getCourse();
+		cout << test << endl;
+	}
+	cout << "------------------------------------------" << endl;
+
+#if 0
 //	cout << "WHY" << endl;
 //	cout << adjVecCourses[0].getCourse() << endl;
 	cout << "------------------------------------------" << endl;
@@ -162,6 +191,7 @@ void requirements:: printAdjVec(){
 	}
 	cout << "---------------------------------------------" << endl;
 //	cout << "HOW" << endl;
+#endif
 }
 
 void requirements:: setTotal(int n){

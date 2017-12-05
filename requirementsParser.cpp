@@ -14,7 +14,7 @@ requirementsParser::requirementsParser(string fileName){
 	ifstream file(fileName);
 	string line;
 	vector<string> reqLine;
-	vector<vector<string>> courses;
+vector<vector<string>> courses;
 	while(getline(file, line)){
 		string temp = line;
 		string temp1;
@@ -41,7 +41,7 @@ requirementsParser::requirementsParser(string fileName){
 		myRequirements -> addReqs(*iter);
 	}
 	myRequirements -> printAdjVec();
-	delete myRequirements;
+	/*delete myRequirements;*/
 
 }
 

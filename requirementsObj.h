@@ -21,7 +21,7 @@ class requirements{
 		void setCourses(vector<string> reqLine);
 		void addReqs(vector<string> reqLine);
 		void printAdjVec();
-
+		bool alreadyIn(vector<string> reqLine);
 		void setTotal(int n);
 		int getTotal();	
 };

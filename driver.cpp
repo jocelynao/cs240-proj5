@@ -9,6 +9,7 @@
 #include "offeringsParser.h"
 #include "plannedObj.h"
 #include "requirementsParser.h"
+#include "requirementsObj.h"
 
 using namespace std;
 
@@ -28,8 +29,10 @@ int main(int argc, char **argv){
 				exit(0);
 			}
 		}
-
+		
 		requirementsParser *parser = new requirementsParser(argv[1]);
+		requirements *myRequirements = parser -> getRequirements();
+		offeringsParser *oparser = new offeringsParser(argv[2], myRequirements);
 	//	(parser -> getRequirements()) -> printAdjVec();
 		/*
 		unordered_map<string, offerings*> offersMap;
