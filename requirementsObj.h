@@ -18,6 +18,7 @@ class requirements{
 		void menu(vector<string> vec);
 		void makeNode(vector<string> vec);
 		void setCourses(vector<string> reqLine);
+		void addReqs(vector<string> reqLine);
 		void printAdjVec();
 
 		void setTotal(int n);

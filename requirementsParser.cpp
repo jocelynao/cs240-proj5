@@ -14,6 +14,7 @@ requirementsParser::requirementsParser(string fileName){
 	ifstream file(fileName);
 	string line;
 	vector<string> reqLine;
+	vector<vector<string>> courses;
 	while(getline(file, line)){
 		string temp = line;
 		string temp1;
@@ -27,8 +28,18 @@ requirementsParser::requirementsParser(string fileName){
 		}
 		cout << endl << endl;*/
 		myRequirements -> setCourses(reqLine);
+		if (reqLine[0] == "COURSE" && reqLine.size() > 3){
+		//	cout << "w" << endl;
+			courses.push_back(reqLine);
+		}
+
 		reqLine.clear();
 	}
+	vector<vector<string>>:: iterator iter;
+	for (iter = courses.begin(); iter != courses.end(); iter++){
+		myRequirements -> addReqs(*iter);
+	}
+	myRequirements -> printAdjVec();
 
 }
 
