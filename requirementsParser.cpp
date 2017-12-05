@@ -36,6 +36,7 @@ requirementsParser::requirementsParser(string fileName){
 		reqLine.clear();
 	}
 	vector<vector<string>>:: iterator iter;
+//	cout << "E" << endl;
 	for (iter = courses.begin(); iter != courses.end(); iter++){
 		myRequirements -> addReqs(*iter);
 	}

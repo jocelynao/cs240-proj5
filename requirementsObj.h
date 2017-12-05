@@ -14,6 +14,7 @@ class requirements{
 		int total;
 		vector<credit> creds;
 		vector<node> adjVecCourses;
+		vector<node*> RCourses;
 	public:
 		void menu(vector<string> vec);
 		void makeNode(vector<string> vec);
