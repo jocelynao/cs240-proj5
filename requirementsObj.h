@@ -13,7 +13,7 @@ class requirements{
 	private:
 		int total;
 		vector<credit> creds;
-		vector<node> adjVecCourses;
+		vector<node*> adjVecCourses;
 		vector<node*> RCourses;
 	public:
 		void menu(vector<string> vec);

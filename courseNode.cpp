@@ -5,10 +5,15 @@
 node:: node(string c, string s){
 	course = c;
 	status = s;
+	postReqs = {};
+	preReqs = {};
 }
 
 node:: node(string c){
 	course = c;
+	status = "";
+	postReqs = {};
+	preReqs = {};
 }
 
 bool node:: checkPR(){
