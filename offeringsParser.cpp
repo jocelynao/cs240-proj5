@@ -10,6 +10,8 @@
 using namespace std;
 
 offeringsParser::offeringsParser(string fileName, requirements *myRequirements){
+	cout << "after initially adding" << endl;
+	myRequirements -> printAdjVec();
 	ifstream file(fileName);
 	string str;
 	bool found;
@@ -21,10 +23,12 @@ offeringsParser::offeringsParser(string fileName, requirements *myRequirements){
 			
 		addAdj.push_back("COURSE");
 		addAdj.push_back(offered -> getClass());
-		addAdj.push_back("O");
-		myRequirements -> setCourses(addAdj);
+		addAdj.push_back(offered -> getTags());
+		
+		myRequirements -> addOffs(addAdj);
 		addAdj.clear();
 	}
+	cout << "Done with offerings file" << endl;
 	myRequirements -> printAdjVec();
 }
 

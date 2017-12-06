@@ -26,13 +26,13 @@ class planned{
 		void addS20(string S20);
 		vector<string> getS20();
 	private:
-		vector<string> F2016;
-		vector<string> S2017;
-		vector<string> F2017;
-		vector<string> S2018;
-		vector<string> F2018;
-		vector<string> S2019;
-		vector<string> F2019;
-		vector<string> S2020;
+		vector<string> F2016 = {"F"};
+		vector<string> S2017 = {"S"};
+		vector<string> F2017 = {"F"};
+		vector<string> S2018 = {"S"};
+		vector<string> F2018 = {"F"};
+		vector<string> S2019 = {"S"};
+		vector<string> F2019 = {"F"};
+		vector<string> S2020 = {"S"};
 };
 #endif

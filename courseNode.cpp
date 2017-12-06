@@ -11,6 +11,38 @@ node:: node(string c){
 	course = c;
 }
 
+bool node:: checkPR(){
+	bool didPR = false;
+	vector<node*>:: iterator iter;
+	if (preReqs.size() != 0){
+		cout << "You cannot take " << course << "  because you must take these classes as prerequistes: ";
+		for (iter = preReqs.begin(); iter != preReqs.end(); iter++){
+			cout << (*iter) -> getCourse() << ", ";
+		}
+		cout << "\n" << endl;
+	}
+	else{
+	//	cout << course << endl;
+		for (iter = postReqs.begin(); iter != postReqs.end(); iter++){
+			(*iter) -> delPreReq(course);
+		}
+		didPR = true;
+	}
+//	cout << "in course node " << didPR << endl;
+	return didPR;
+}
+
+void node:: delPreReq(string c){
+	int i = 0;
+	vector<node*>:: iterator iter;
+	for (iter = preReqs.begin(); iter != preReqs.end(); iter++, i++){
+		if ((*iter) -> getCourse() == c){
+			break;
+		}
+	}
+	preReqs.erase(preReqs.begin() + i);
+}
+
 void node:: print(){
 	vector<node*>:: iterator iter;
 	cout << course << " " <<  status << endl;
@@ -27,11 +59,16 @@ void node:: print(){
 }
 
 void node:: addPostReq(node *&ptr){
-	postReqs.push_back(ptr);
-	postLength = postReqs.size();
-/*	vector<node*>:: iterator iter;
-	cout << "ADD" << endl;
-	for (iter = postReqs.begin(); iter != postReqs.end(); iter++){
+//	cout << "in add post req" << endl;
+//	cout << ptr -> getCourse() << endl;
+//	cout << course << endl;
+	if (ptr -> getCourse() != course){
+		postReqs.push_back(ptr);
+		postLength = postReqs.size();
+	}
+	vector<node*>:: iterator iter;
+//	cout << "ADD" << endl;
+/*	for (iter = postReqs.begin(); iter != postReqs.end(); iter++){
 		cout << (*iter) -> getCourse() << endl;
 	}*/
 }
@@ -55,6 +92,10 @@ int node:: getPostLength(){
 
 int node:: getPreLength(){
 	return preLength;
+}
+
+void node:: setStatus(string s){
+	status = s;
 }
 
 /*void courseLL:: insert(string name, string s){	

@@ -23,12 +23,8 @@ void requirements:: setCourses(vector<string> reqLine){
 
 	}
 	else if(reqLine[0] == "COURSE"){
-		if(!alreadyIn(reqLine)){
-			makeNode(reqLine);
-			cout << reqLine[1] << " inserted." << endl;
-		}else{
-			cout << reqLine[1] << " already found." << endl;
-		}		
+		makeNode(reqLine);
+	//	printAdjVec();	
 	}
 	else{
 		cout << "HI" << endl;
@@ -37,7 +33,7 @@ void requirements:: setCourses(vector<string> reqLine){
 
 bool requirements::alreadyIn(vector<string> vec){
 	vector<node>::iterator iter;
-	cout << adjVecCourses.size() << endl;
+//	cout << adjVecCourses.size() << endl;
 	for (iter = adjVecCourses.begin(); iter != adjVecCourses.end(); iter++){
 		
 		string test = iter -> getCourse();
@@ -45,31 +41,32 @@ bool requirements::alreadyIn(vector<string> vec){
 			return true;
 		}
 	}
-
 	return false;
 }
 
 void requirements:: makeNode(vector<string> vec){
+	cout << "before making node" << endl;
+	printAdjVec();
 	node *newNode;
+//	cout << "HERE" << vec[1] << endl;
 	newNode = new node(vec[1], vec[2]);
 //	cout << newNode.getStatus() << endl;
 //	cout << newNode.getCourse() << endl;
-	if (vec[2] == "R"){
-		RCourses.push_back(newNode);
-	}
 	adjVecCourses.push_back(*newNode);
+	cout << "after making node" << endl;
+	printAdjVec();
 }
 
 void requirements:: addReqs(vector<string> reqLine){
-//	cout << "E" << endl;
+//	cout << "in add req" << endl;
 	node *coursePtr;
-	vector<node*> PR;
+	vector<node*> prereqs;
 	vector<node>:: iterator iter;
 	for (int i = 3; i < reqLine.size(); i++){
 		bool preReqFound = false;
 		for (iter = adjVecCourses.begin(); iter != adjVecCourses.end(); iter++){
-			if (iter -> getCourse() == reqLine[i]){	
-				PR.push_back(&(*iter));
+			if (iter -> getCourse() == reqLine[i]){
+				prereqs.push_back(&(*iter));
 				preReqFound = true;
 				break;
 			}
@@ -80,20 +77,130 @@ void requirements:: addReqs(vector<string> reqLine){
 			newNode = new node(reqLine[i]);
 		//	node newNode(reqLine[i]);
 			adjVecCourses.push_back(*newNode);
-			PR.push_back(newNode);
+			prereqs.push_back(&adjVecCourses[adjVecCourses.size() - 1]);
 		}
 	}
 	for (iter = adjVecCourses.begin(); iter != adjVecCourses.end(); iter++){
 		if (iter -> getCourse() == reqLine[1]){
 			coursePtr = &(*iter);
-			coursePtr -> addPreReqs(PR);	
+			coursePtr -> addPreReqs(prereqs);	
 		}
 	}
 	vector<node*>:: iterator iter2;
-	for (iter2 = PR.begin(); iter2 != PR.end(); iter2++){
+	for (iter2 = prereqs.begin(); iter2 != prereqs.end(); iter2++){
+		//cout << coursePtr -> getCourse() << endl;
 		(*iter2) -> addPostReq(coursePtr);
 	}
+//	cout << "in add req" << endl;
 //	printAdjVec();
+}
+
+void requirements:: findReqs(){
+	vector<node>:: iterator iter;
+	for (iter = adjVecCourses.begin(); iter != adjVecCourses.end(); iter++){
+		if (iter -> getStatus() == "R"){
+			RCourses.push_back(&(*iter));
+		}
+	}
+}
+
+void requirements:: addOffs(vector<string> courseOffs){
+	//cout << courseOffs[0] << endl;
+	vector<string>:: iterator iter;
+	cout << "in addOffs" << endl;
+	for (iter = courseOffs.begin(); iter != courseOffs.end(); iter++){
+		cout << *iter << endl;
+	}
+	if(!alreadyIn(courseOffs)){
+		cout << "HERE " <<  courseOffs[1] << endl;
+		makeNode(courseOffs);
+	//	printAdjVec();
+		string classAbrv = courseOffs[1].substr(0, 2);
+	//	cout << classAbrv << endl;
+		if (classAbrv == "CS"){
+			vector<node*>:: iterator iter;
+			adjVecCourses[adjVecCourses.size() - 1].addPreReqs(RCourses);
+			for (iter = RCourses.begin(); iter != RCourses.end(); iter++){
+				node *np = &(adjVecCourses[adjVecCourses.size() - 1]);
+				(*iter) -> addPostReq(np);
+			}
+		}
+	//	cout << courseOffs[1] << " inserted." << endl;
+	}
+	else{
+	//	cout << courseOffs[1] << " already found." << endl;
+	}
+//	cout << "done" << endl;	
+}
+
+bool requirements:: check(vector<string> semClasses){
+//	printAdjVec();
+//	cout << "in checking" << endl;
+	bool didPR;
+	vector<node>:: iterator iter;
+	for (int i = 2; i < semClasses.size(); i++){
+	//	cout << "semester class: " << semClasses[i] << endl;
+		for (iter = adjVecCourses.begin(); iter != adjVecCourses.end(); iter++){
+		//	cout << iter -> getCourse() << endl; 
+			if (iter -> getCourse() == semClasses[i]){
+			//	cout << "hello" << endl;
+			//	cout << semClasses[i] << endl;
+				didPR = iter -> checkPR();
+			/*	if (didPR == true){
+					cout << "huh" << endl;
+				}*/
+				break;
+			}
+		}
+		if (!didPR){
+		//	cout << "how" << endl;
+			break;
+		}
+	}
+
+	cout << "After a semester" << endl;
+	printAdjVec();
+	return didPR;
+	//cout << "I" << endl;
+}
+
+void requirements:: printAdjVec(){
+	
+/*	cout << "------------------------------------------" << endl;
+	vector<node>:: iterator iter;
+	for (iter = adjVecCourses.begin(); iter != adjVecCourses.end(); iter++){
+		string test = iter -> getCourse();
+		cout << test << endl;
+	}
+	cout << "------------------------------------------" << endl;*/
+
+
+//	cout << "WHY" << endl;
+//	cout << adjVecCourses[0].getCourse() << endl;
+	cout << "------------------------------------------" << endl;
+	cout << "Adjacency list: " << endl;
+	vector<node>:: iterator iter;
+	for (iter = adjVecCourses.begin(); iter != adjVecCourses.end(); iter++){
+	//	cout << "I" << endl;
+	//	cout << "E" << endl;
+		iter -> print();
+	}
+	cout << "\n" << endl;
+	cout << "Required courses: " << endl;
+	vector<node*>:: iterator iter2;
+	for (iter2 = RCourses.begin(); iter2 != RCourses.end(); iter2++){
+		(*iter2) -> print();
+	}
+	cout << "---------------------------------------------" << endl;
+//	cout << "HOW" << endl;
+}
+
+void requirements:: setTotal(int n){
+	total = n;
+}
+
+int requirements:: getTotal(){
+	return total;
 }
 
 /*void requirements:: addReqs(vector<string> reqLine){
@@ -162,45 +269,7 @@ void requirements:: addReqs(vector<string> reqLine){
 //	coursePtr -> print();
 }
 */
-void requirements:: printAdjVec(){
-	
-	cout << "------------------------------------------" << endl;
-	vector<node>:: iterator iter;
-	for (iter = adjVecCourses.begin(); iter != adjVecCourses.end(); iter++){
-		string test = iter -> getCourse();
-		cout << test << endl;
-	}
-	cout << "------------------------------------------" << endl;
 
-#if 0
-//	cout << "WHY" << endl;
-//	cout << adjVecCourses[0].getCourse() << endl;
-	cout << "------------------------------------------" << endl;
-	cout << "Adjacency list: " << endl;
-	vector<node>:: iterator iter;
-	for (iter = adjVecCourses.begin(); iter != adjVecCourses.end(); iter++){
-	//	cout << "I" << endl;
-	//	cout << "E" << endl;
-		iter -> print();
-	}
-	cout << "\n" << endl;
-	cout << "Required courses: " << endl;
-	vector<node*>:: iterator iter2;
-	for (iter2 = RCourses.begin(); iter2 != RCourses.end(); iter2++){
-		(*iter2) -> print();
-	}
-	cout << "---------------------------------------------" << endl;
-//	cout << "HOW" << endl;
-#endif
-}
-
-void requirements:: setTotal(int n){
-	total = n;
-}
-
-int requirements:: getTotal(){
-	return total;
-}
 
 /*void requirements:: makeNode(vector<string> vec){
 	node newNode(vec[1], vec[2]);

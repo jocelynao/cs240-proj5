@@ -18,6 +18,9 @@ class node{
 	public:
 		node(string c, string s);
 		node(string c);
+
+		bool checkPR();
+		void delPreReq(string c);
 		void print();
 
 		void addPostReq(node *&ptr);
@@ -27,6 +30,8 @@ class node{
 		string getStatus();
 		int getPostLength();
 		int getPreLength();
+
+		void setStatus(string s);
 
 };
 

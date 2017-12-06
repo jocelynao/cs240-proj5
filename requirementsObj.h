@@ -20,8 +20,13 @@ class requirements{
 		void makeNode(vector<string> vec);
 		void setCourses(vector<string> reqLine);
 		void addReqs(vector<string> reqLine);
+		void findReqs();
+		void addOffs(vector<string> courseOffs);
+		void addReqsOffs();
 		void printAdjVec();
 		bool alreadyIn(vector<string> reqLine);
+		bool check(vector<string> semClasses);
+
 		void setTotal(int n);
 		int getTotal();	
 };
