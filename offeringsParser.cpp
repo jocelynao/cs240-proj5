@@ -11,7 +11,7 @@ using namespace std;
 
 offeringsParser::offeringsParser(string fileName, requirements *myRequirements){
 	cout << "after initially adding" << endl;
-	myRequirements -> printAdjVec();
+//	myRequirements -> printAdjVec();
 	ifstream file(fileName);
 	string str;
 	bool found;
@@ -29,7 +29,7 @@ offeringsParser::offeringsParser(string fileName, requirements *myRequirements){
 		addAdj.clear();
 	}
 	cout << "Done with offerings file" << endl;
-	myRequirements -> printAdjVec();
+	/*myRequirements -> printAdjVec();*/
 }
 
 unordered_map<string, offerings*> offeringsParser::getMap(){

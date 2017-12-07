@@ -24,3 +24,11 @@ string credit:: getName(){
 int credit:: getNum(){
 	return credNum;
 }
+
+int credit::getAmount(){
+	return amount;
+}
+
+void credit::addAmount(int amt){
+	amount += amt;
+}

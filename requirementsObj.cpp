@@ -46,21 +46,9 @@ bool requirements::alreadyIn(vector<string> vec){
 }
 
 void requirements:: makeNode(vector<string> vec){
-	cout << "before making node" << endl;
-	printAdjVec();
 	node *newNode;
-	cout << "Makenode vec1: " << vec[1] << endl;
-	cout << "makenode vec2: " << vec[2] << endl;
 	newNode = new node(vec[1], vec[2]);
-	cout << "node addresss: " << newNode << endl;
-	cout << "made node but did not push" << endl;
-	printAdjVec();
-
-//	cout << newNode.getStatus() << endl;
-//	cout << newNode.getCourse() << endl;
 	adjVecCourses.push_back(newNode);
-	cout << "after pushing" << endl;
-	printAdjVec();
 }
 
 void requirements:: addReqs(vector<string> reqLine){
@@ -113,12 +101,12 @@ void requirements:: findReqs(){
 void requirements:: addOffs(vector<string> courseOffs){
 	//cout << courseOffs[0] << endl;
 	vector<string>:: iterator iter;
-	cout << "in addOffs" << endl;
-	for (iter = courseOffs.begin(); iter != courseOffs.end(); iter++){
+	//cout << "in addOffs" << endl;
+	/*for (iter = courseOffs.begin(); iter != courseOffs.end(); iter++){
 		cout << *iter << endl;
-	}
+	}*/
 	if(!alreadyIn(courseOffs)){
-		cout << "HERE " <<  courseOffs[1] << endl;
+	//	cout << "HERE " <<  courseOffs[1] << endl;
 		makeNode(courseOffs);
 	//	printAdjVec();
 		string classAbrv = courseOffs[1].substr(0, 2);
@@ -140,34 +128,26 @@ void requirements:: addOffs(vector<string> courseOffs){
 }
 
 bool requirements:: check(vector<string> semClasses){
-//	printAdjVec();
-//	cout << "in checking" << endl;
 	bool didPR;
 	vector<node*>:: iterator iter;
 	for (int i = 2; i < semClasses.size(); i++){
-	//	cout << "semester class: " << semClasses[i] << endl;
+		cout << "a ";
 		for (iter = adjVecCourses.begin(); iter != adjVecCourses.end(); iter++){
-		//	cout << iter -> getCourse() << endl; 
+			cout << "b ";
 			if ((*iter) -> getCourse() == semClasses[i]){
-			//	cout << "hello" << endl;
-			//	cout << semClasses[i] << endl;
+				cout << "c ";
 				didPR = (*iter) -> checkPR();
-			/*	if (didPR == true){
-					cout << "huh" << endl;
-				}*/
+				cout << "d ";
 				break;
 			}
 		}
 		if (!didPR){
-		//	cout << "how" << endl;
+			cout << "e ";
 			break;
 		}
 	}
-
-	cout << "After a semester" << endl;
-	printAdjVec();
+	cout << "f ";
 	return didPR;
-	//cout << "I" << endl;
 }
 
 void requirements:: printAdjVec(){
@@ -214,6 +194,10 @@ void requirements:: setTotal(int n){
 
 int requirements:: getTotal(){
 	return total;
+}
+
+vector<credit> requirements:: getCreds(){
+	return creds;
 }
 
 /*void requirements:: addReqs(vector<string> reqLine){

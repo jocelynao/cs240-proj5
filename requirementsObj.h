@@ -26,9 +26,9 @@ class requirements{
 		void printAdjVec();
 		bool alreadyIn(vector<string> reqLine);
 		bool check(vector<string> semClasses);
-
 		void setTotal(int n);
-		int getTotal();	
+		int getTotal();
+		vector<credit> getCreds();	
 };
 
 #endif
