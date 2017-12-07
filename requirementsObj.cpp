@@ -28,7 +28,6 @@ void requirements:: setCourses(vector<string> reqLine){
 	//	printAdjVec();	
 	}
 	else{
-		cout << "HI" << endl;
 	}
 }
 
@@ -131,22 +130,16 @@ bool requirements:: check(vector<string> semClasses){
 	bool didPR;
 	vector<node*>:: iterator iter;
 	for (int i = 2; i < semClasses.size(); i++){
-		cout << "a ";
 		for (iter = adjVecCourses.begin(); iter != adjVecCourses.end(); iter++){
-			cout << "b ";
 			if ((*iter) -> getCourse() == semClasses[i]){
-				cout << "c ";
 				didPR = (*iter) -> checkPR();
-				cout << "d ";
 				break;
 			}
 		}
 		if (!didPR){
-			cout << "e ";
 			break;
 		}
 	}
-	cout << "f ";
 	return didPR;
 }
 

@@ -79,14 +79,6 @@ planned::planned(string fileName){
 			i++;
 		}
 	}
-	cout << getSem1().at(1) << endl <<
-		getSem2().at(1) << endl <<
-		getSem3().at(1) << endl <<
-		getSem4().at(1) << endl <<
-		getSem5().at(1) << endl <<
-		getSem6().at(1) << endl <<
-		getSem7().at(1) << endl <<
-		getSem8().at(1) << endl;
 }
 
 void planned::addSem1(string Sem1){

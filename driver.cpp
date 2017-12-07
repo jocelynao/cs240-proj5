@@ -14,23 +14,43 @@
 #include "credit.h"
 
 using namespace std;
-
-int updateTotal(requirements *myRequirements, unordered_map<string, offerings*> map, vector<string> sem){
-	int total = 0;
+vector<credit> genEdCheck(requirements *myRequirements, unordered_map<string, offerings*> map, vector<string> sem, vector<credit> myCred){
+	vector<credit>::iterator iter;
 	for(int i = 2; i < sem.size(); i++){
-		if(sem[i].substr(0, 2) == "CS"){
-			total += map[sem[i]] -> getCredits();
-		}
+		offerings *myOfferings = map[sem[i]];
+		string getTags = myOfferings -> getTags();
 		if(map[sem[i]] -> getTags() != ""){
+			string tags = map[sem[i]] -> getTags();
+			cout << "-------------------------------" << endl;
 			for(int j = 0; j < map[sem[i]] -> getTags().length(); j++){
-				vector<credit> myCred = myRequirements -> getCreds();
-				vector<credit>::iterator iter;
+				string myTag;
+				stringstream ss;
+				char oneTag = tags[j];
+				ss << oneTag;
+				ss >> myTag;
 				for(iter = myCred.begin(); iter != myCred.end(); iter++){
-					if(iter -> getName() == map[sem[i]] ->getTags().substr(j, j+1)){
+					cout << "comparing " << iter -> getName() << " with the tag " << myTag << endl;
+					if(iter -> getName() == myTag){
 						iter -> addAmount(map[sem[i]] -> getCredits());
 					}	
 				}
 			}
+			cout << "-------------------------------" << endl;
+		}
+	}
+	for(iter = myCred.begin(); iter != myCred.end(); iter++){
+		cout << iter -> getName() << " " << iter -> getAmount() << endl;
+	}
+	return myCred;
+
+
+}
+int updateTotal(requirements *myRequirements, unordered_map<string, offerings*> map, vector<string> sem){
+	int total = 0;
+	vector<credit>::iterator iter;
+	for(int i = 2; i < sem.size(); i++){
+		if(sem[i].substr(0, 2) == "CS"){
+			total += map[sem[i]] -> getCredits();
 		}
 	}
 	return total;
@@ -95,12 +115,12 @@ int main(int argc, char **argv){
 
 		offeringsParser *oparser = new offeringsParser(argv[2], myRequirements);
 		unordered_map<string, offerings*> map = oparser -> getMap();
+		vector<credit> myCred = myRequirements -> getCreds();
 
 		planned *plan = new planned(argv[3]);
 	
 		bool planWorks = true;
 		while(planWorks){
-			cout << "IN IT" << endl;
 			vector<string> sem = plan -> getSem1();
 			planWorks = checkPlan(myRequirements, map, sem);
 			if (!planWorks){
@@ -108,6 +128,7 @@ int main(int argc, char **argv){
 				break;
 			}
 			total += updateTotal(myRequirements, map, sem);
+			myCred = genEdCheck(myRequirements, map, sem, myCred);
 			sem = plan -> getSem2();
 			planWorks = checkPlan(myRequirements, map, sem);
 			if (!planWorks){
@@ -116,6 +137,7 @@ int main(int argc, char **argv){
 				break;
 			}
 			total += updateTotal(myRequirements, map, sem);
+			myCred = genEdCheck(myRequirements, map, sem, myCred);
 			sem = plan -> getSem3();
 			planWorks = checkPlan(myRequirements, map, sem);
 			if (!planWorks){
@@ -124,6 +146,7 @@ int main(int argc, char **argv){
 				break;
 			}
 			total += updateTotal(myRequirements, map, sem);
+			myCred = genEdCheck(myRequirements, map, sem, myCred);
 			sem = plan -> getSem4();
 			planWorks = checkPlan(myRequirements, map, sem);
 			if (!planWorks){
@@ -131,6 +154,7 @@ int main(int argc, char **argv){
 				break;
 			}
 			total += updateTotal(myRequirements, map, sem);
+			myCred = genEdCheck(myRequirements, map, sem, myCred);
 			sem = plan -> getSem5();
 			planWorks = checkPlan(myRequirements, map, sem);
 			if (!planWorks){
@@ -138,6 +162,7 @@ int main(int argc, char **argv){
 				break;
 			}
 			total += updateTotal(myRequirements, map, sem);
+			myCred = genEdCheck(myRequirements, map, sem, myCred);
 			sem = plan -> getSem6();
 			planWorks = checkPlan(myRequirements, map, sem);
 			if (!planWorks){
@@ -145,6 +170,7 @@ int main(int argc, char **argv){
 				break;
 			}
 			total += updateTotal(myRequirements, map, sem);
+			myCred = genEdCheck(myRequirements, map, sem, myCred);
 			sem = plan -> getSem7();
 			planWorks = checkPlan(myRequirements, map, sem);
 			if (!planWorks){
@@ -152,6 +178,7 @@ int main(int argc, char **argv){
 				break;
 			}
 			total += updateTotal(myRequirements, map, sem);
+			myCred = genEdCheck(myRequirements, map, sem, myCred);
 			sem = plan -> getSem8();
 			planWorks = checkPlan(myRequirements, map, sem);
 			if (!planWorks){
@@ -159,15 +186,16 @@ int main(int argc, char **argv){
 				break;
 			}
 			total += updateTotal(myRequirements, map, sem);
+			myCred = genEdCheck(myRequirements, map, sem, myCred);
 			if(total < myRequirements -> getTotal()){
 				cout << "Bad plan! You need " << myRequirements -> getTotal() << " credits to graduate, but you only have " << total << endl;
 				break;
 			}
-			vector<credit> myCred = myRequirements -> getCreds();
 			vector<credit>::iterator iter;
 			for(iter = myCred.begin(); iter != myCred.end(); iter++){
 				if(iter -> getAmount() < iter -> getNum()){
-					cout << "Bad plan! You need " << iter -> getAmount() << " " << iter ->getName() << " credits to graduate, but you only have " << total << endl;
+					cout << "Bad plan! You need " << iter -> getNum() << " " << iter ->getName() << " credits to graduate, but you only have " << iter -> getAmount() << endl;
+					planWorks = false;
 					break;
 				}
 			}

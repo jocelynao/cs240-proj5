@@ -18,10 +18,10 @@ class offerings{
 		void setTags(string setTags);
 		string getTags();
 	private:
-		string className;
-		int credits;
-		string term;
-		string tags;
+		string className = "";
+		int credits = 0;
+		string term = "";
+		string tags = "";
 };
 
 #endif
