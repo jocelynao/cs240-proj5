@@ -148,7 +148,7 @@ bool validClasses(requirements *myRequirements, unordered_map<string, offerings*
 	vector<string> sem = plan -> getSem1();
 	for(int i = 2; i < sem.size(); i++){
 		if(offeringsMap.find(sem[i]) == offeringsMap.end()){
-			cout << "This schedule doesn't work because " << sem[i] << " does not exist." << endl;
+			cout << "This schedule doesn't work because " << sem[i] << " is not offered." << endl;
 			return false;
 		}else{
 			if(taken.find(sem[i]) == taken.end()){
