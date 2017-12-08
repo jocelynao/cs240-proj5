@@ -21,7 +21,7 @@ void requirements:: setCourses(vector<string> reqLine){
 	}
 	else if(reqLine[0] == "CHOOSE"){
 		chooseVec.push_back(move(new choose(reqLine)));
-		cout << "size: " << chooseVec.size() << endl;
+	//	cout << "size: " << chooseVec.size() << endl;
 	}
 	else{
 		cout << "LINE ERROR!" << endl;
@@ -133,6 +133,7 @@ void requirements:: addOffs(vector<string> courseOffs){
 }
 
 bool requirements:: check(vector<string> semClasses){
+//	cout << "136" << endl;
 	vector<string>:: iterator iter2;
 /*	for (iter2 = semClasses.begin(); iter2 != semClasses.end(); iter2++){
 		cout << *iter2 << endl;

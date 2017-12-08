@@ -18,6 +18,7 @@ node:: node(string c){
 
 bool node:: checkPR(vector<string> sem){
 	bool didPR = true;
+//	cout << "21" << endl;
 	vector<node*>:: iterator iter;
 	vector<string>::iterator iter1;
 
@@ -29,7 +30,7 @@ bool node:: checkPR(vector<string> sem){
 //	cout << "c" << course << endl;
 
 	if (preReqs.size() != 0){
-		cout << "You cannot take " << course << "  because you must take these classes as prerequistes: ";
+		cout << "You cannot take " << course << "  because you must take these classes before as prerequistes: ";
 		for (iter = preReqs.begin(); iter != preReqs.end(); iter++){
 			cout << (*iter) -> getCourse() << ", ";
 		}
@@ -51,7 +52,7 @@ bool node:: checkPR(vector<string> sem){
 				/*	cout << "mypost " << post -> getCourse() << endl;
 					cout << "myclass " << myClass << endl;
 					cout << "course " << course << endl;*/
-					cout << "You cannot take " << myClass << " at the same time as " << course << endl;
+					cout << "You cannot take " << myClass << " at the same time as " << course << " because " << course << "is a prerequisite" <<  endl;
 					didPR = false;
 					break;	
 				}

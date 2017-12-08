@@ -264,6 +264,7 @@ bool validClasses(requirements *myRequirements, unordered_map<string, offerings*
 bool checkPlan(requirements *myRequirements, unordered_map<string, offerings*> map, vector<string> sem){
 	bool planWorks = true;
 	int credsEarned = 0;
+//	cout << "267" << endl;
 	vector<string>:: iterator iter;
 /*	for (iter = sem.begin(); iter != sem.end(); iter++){
 		cout << *iter << endl;
@@ -314,8 +315,10 @@ int main(int argc, char **argv){
 		}
 	//	cout << "315" << endl;	
 		requirementsParser *parser = new requirementsParser(argv[1]);
+	//	cout << "318" << endl;
 		requirements *myRequirements = parser -> getRequirements();
 		offeringsParser *oparser = new offeringsParser(argv[2], myRequirements);
+	//	cout << "320" << endl;
 		unordered_map<string, offerings*> map = oparser -> getMap();
 		vector<credit> myCred = myRequirements -> getCreds();
 
@@ -417,11 +420,9 @@ int main(int argc, char **argv){
 			}
 			cout << endl << "-----------------------" << endl;
 			planWorks = checkPlan(myRequirements, map, sem);
+			checkedAll = true;
 			if (!planWorks){
 				break;
-			}
-			else{
-				checkedAll = true;
 			}
 			total += updateTotal(myRequirements, map, sem);
 			myCred = genEdCheck(myRequirements, map, sem, myCred);

@@ -27,6 +27,7 @@ requirementsParser::requirementsParser(string fileName){
 			cout << *iter << " ";
 		}
 		cout << endl << endl;*/
+	//	cout << "30" << endl;
 		myRequirements -> setCourses(reqLine);
 		if (reqLine[0] == "COURSE" && reqLine.size() > 3){
 		//	cout << "w" << endl;
