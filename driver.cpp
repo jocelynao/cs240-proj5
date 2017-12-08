@@ -312,7 +312,7 @@ int main(int argc, char **argv){
 				exit(0);
 			}
 		}
-		
+	//	cout << "315" << endl;	
 		requirementsParser *parser = new requirementsParser(argv[1]);
 		requirements *myRequirements = parser -> getRequirements();
 		offeringsParser *oparser = new offeringsParser(argv[2], myRequirements);
@@ -322,6 +322,7 @@ int main(int argc, char **argv){
 		planned *plan = new planned(argv[3]);
 	//	cout << "323" << endl;
 		bool planWorks = true;
+		bool checkedAll = false;
 		while(planWorks){
 			vector<string> sem = plan -> getSem1();
 			vector<string>::iterator iter1;
@@ -419,6 +420,9 @@ int main(int argc, char **argv){
 			if (!planWorks){
 				break;
 			}
+			else{
+				checkedAll = true;
+			}
 			total += updateTotal(myRequirements, map, sem);
 			myCred = genEdCheck(myRequirements, map, sem, myCred);
 			if(total < myRequirements -> getTotal()){
@@ -437,6 +441,9 @@ int main(int argc, char **argv){
 		//	cout << "437" << endl;
 			planWorks = myRequirements -> checkMandRs();
 			break;
+		}
+		if (!checkedAll){
+			cout << "Whole schedule was not checked because of error stated above" << endl;
 		}
 		if (planWorks){
 			cout << "Your schedule is good" << endl;

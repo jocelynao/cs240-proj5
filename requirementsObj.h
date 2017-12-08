@@ -34,6 +34,7 @@ class requirements{
 		int getTotal();
 		vector<credit> getCreds();
 		vector<choose*> getChooseVec();	
+		~requirements();
 };
 
 #endif

@@ -233,6 +233,20 @@ vector<credit> requirements:: getCreds(){
 	return creds;
 }
 
+requirements:: ~requirements(){
+	vector<node*>:: iterator iter;
+	for (iter = RCourses.begin(); iter != RCourses.end(); iter++){
+		(*iter) = NULL;
+	}
+	for (iter = MCourses.begin(); iter != MCourses.end(); iter++){
+		(*iter) = NULL;
+	}
+	for (iter = adjVecCourses.begin(); iter != adjVecCourses.end(); iter++){
+		delete *iter;
+	}
+	adjVecCourses.clear();
+}
+
 /*void requirements:: addReqs(vector<string> reqLine){
 	cout << "E" << endl;
 	node *coursePtr;

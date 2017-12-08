@@ -35,6 +35,8 @@ class node{
 
 		void setStatus(string s);
 
+		~node();
+
 };
 
 /*class courseLL{

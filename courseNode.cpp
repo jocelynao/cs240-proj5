@@ -81,7 +81,8 @@ void node:: delPreReq(string c){
 			break;
 		}
 	}
-	preReqs.erase(preReqs.begin() + i);
+	node* np = *(preReqs.erase(preReqs.begin() + i));
+	np = NULL;
 }
 
 void node:: print(){
@@ -141,6 +142,16 @@ bool node:: getTaken(){
 
 void node:: setStatus(string s){
 	status = s;
+}
+
+node:: ~node(){
+	vector<node*>:: iterator iter;
+	for (iter = postReqs.begin(); iter != postReqs.end(); iter++){
+		(*iter) = NULL;
+	}
+	for (iter = preReqs.begin(); iter != preReqs.end(); iter++){
+		(*iter) = NULL;
+	}
 }
 
 /*void courseLL:: insert(string name, string s){	
