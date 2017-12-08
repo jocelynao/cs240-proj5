@@ -16,17 +16,53 @@ node:: node(string c){
 	preReqs = {};
 }
 
-bool node:: checkPR(){
-	bool didPR = false;
+bool node:: checkPR(vector<string> sem){
+	bool didPR = true;
 	vector<node*>:: iterator iter;
+	vector<string>::iterator iter1;
+
+/*	cout << "node: " << course << endl;
+	for(iter = postReqs.begin(); iter != postReqs.end(); iter++){
+		node *post = *iter;
+		cout << "post req" << post -> getCourse() << endl;
+	}*/
+	cout << "c" << course << endl;
+
 	if (preReqs.size() != 0){
 		cout << "You cannot take " << course << "  because you must take these classes as prerequistes: ";
 		for (iter = preReqs.begin(); iter != preReqs.end(); iter++){
 			cout << (*iter) -> getCourse() << ", ";
 		}
 		cout << "\n" << endl;
+		didPR = false;
 	}
-	if (!didPR){
+	if(didPR){
+		for(iter1 = sem.begin(); iter1 != sem.end(); iter1++){
+			string myClass = *iter1;
+
+			
+			for(iter = postReqs.begin(); iter != postReqs.end(); iter++){
+				node *post = *iter;
+
+				cout << "post node: " << post -> getCourse() << endl;
+
+				
+				if(post -> getCourse() == myClass && myClass != course){
+					cout << "mypost " << post -> getCourse() << endl;
+					cout << "myclass " << myClass << endl;
+					cout << "course " << course << endl;
+					cout << "You cannot take " << myClass << " at the same time as " << course << endl;
+					didPR = false;
+					break;	
+				}
+				
+			}
+			if(!didPR){
+				break;
+			}
+		}
+	}
+	if (didPR){
 	//	cout << course << endl;
 		for (iter = postReqs.begin(); iter != postReqs.end(); iter++){
 			(*iter) -> delPreReq(course);

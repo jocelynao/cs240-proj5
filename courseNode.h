@@ -19,7 +19,7 @@ class node{
 		node(string c, string s);
 		node(string c);
 
-		bool checkPR();
+		bool checkPR(vector<string> sem);
 		void delPreReq(string c);
 		void print();
 

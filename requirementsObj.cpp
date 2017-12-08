@@ -132,7 +132,7 @@ bool requirements:: check(vector<string> semClasses){
 	for (int i = 2; i < semClasses.size(); i++){
 		for (iter = adjVecCourses.begin(); iter != adjVecCourses.end(); iter++){
 			if ((*iter) -> getCourse() == semClasses[i]){
-				didPR = (*iter) -> checkPR();
+				didPR = (*iter) -> checkPR(semClasses);
 				break;
 			}
 		}
