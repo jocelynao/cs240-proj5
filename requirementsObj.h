@@ -16,6 +16,7 @@ class requirements{
 		vector<credit> creds;
 		vector<node*> adjVecCourses;
 		vector<node*> RCourses;
+		vector<node*> MCourses;
 		vector<choose*> chooseVec;
 	public:
 		void menu(vector<string> vec);
@@ -28,6 +29,7 @@ class requirements{
 		void printAdjVec();
 		bool alreadyIn(vector<string> reqLine);
 		bool check(vector<string> semClasses);
+		bool checkMandRs();
 		void setTotal(int n);
 		int getTotal();
 		vector<credit> getCreds();

@@ -262,33 +262,37 @@ bool validClasses(requirements *myRequirements, unordered_map<string, offerings*
 }
 
 bool checkPlan(requirements *myRequirements, unordered_map<string, offerings*> map, vector<string> sem){
-		bool planWorks = true;
-		int credsEarned = 0;
-		vector<string>:: iterator iter;
-		while (planWorks){
-			for (int i = 2; i < sem.size(); i++){
-
-				if(map[sem[i]] -> getTerm() != sem[0] && 
-						map[sem[i]] -> getTerm() != "E"){
-					if(sem[0] == "F"){
-						cout << "This schedule doesn't work because " << sem[i] << " can only be taken during the spring semester and you're trying to take it in " << sem[1] << endl;
-					}
-					else{
-						cout << "This schedule doesn't work because " << sem[i] << " can only be taken during the fall semester and you're trying to take it in " << sem[1] << endl;
-					}
-					planWorks = false;
-					break;
-				}	
-			}
-
-			cout << planWorks << endl;
-			if (planWorks){
-				planWorks = myRequirements -> check(sem);
-			}
-			if (planWorks){
-		}
-		return planWorks;
+	bool planWorks = true;
+	int credsEarned = 0;
+	vector<string>:: iterator iter;
+/*	for (iter = sem.begin(); iter != sem.end(); iter++){
+		cout << *iter << endl;
 	}
+	cout << "end iter" << endl;*/
+	while (planWorks){
+		for (int i = 2; i < sem.size(); i++){
+
+			if(map[sem[i]] -> getTerm() != sem[0] && 
+					map[sem[i]] -> getTerm() != "E"){
+				if(sem[0] == "F"){
+					cout << "This schedule doesn't work because " << sem[i] << " can only be taken during the spring semester and you're trying to take it in " << sem[1] << endl;
+				}
+				else{
+					cout << "This schedule doesn't work because " << sem[i] << " can only be taken during the fall semester and you're trying to take it in " << sem[1] << endl;
+				}
+				planWorks = false;
+				break;
+			}	
+		}
+
+	//	cout << planWorks << endl;
+		if (planWorks){
+		//	cout << "2" << endl;
+			planWorks = myRequirements -> check(sem);
+			break;
+		}
+	}
+	return planWorks;
 }
 
 int main(int argc, char **argv){
@@ -316,32 +320,37 @@ int main(int argc, char **argv){
 		vector<credit> myCred = myRequirements -> getCreds();
 
 		planned *plan = new planned(argv[3]);
-	
+	//	cout << "323" << endl;
 		bool planWorks = true;
 		while(planWorks){
 			vector<string> sem = plan -> getSem1();
 			vector<string>::iterator iter1;
+		/*	for (iter1 = sem.begin(); iter1 != sem.end(); iter1++){
+				cout << *iter1 << endl;
+			}*/
+		//	cout <<"done" << endl;
 			planWorks = validClasses(myRequirements, map, plan);
+		//	cout << "HERE" << endl;
 			if(!planWorks){
-				cout << "Bad plan!" << endl;
+			//	cout << "here" << endl;
 				break;
 			}
 			planWorks = checkPlan(myRequirements, map, sem);
+		//	cout << "HI" << endl;
+		//	cout << "here" << endl;
 			if (!planWorks){
-				cout << "Bad plan!" << endl;
 				break;
 			}
 			total += updateTotal(myRequirements, map, sem);
 			myCred = genEdCheck(myRequirements, map, sem, myCred);
-			sem = plan -> getSem2();			
-			for(iter1 = sem.begin(); iter1 != sem.end(); iter1++){
+			sem = plan -> getSem2();
+		//	cout << "here2" << endl;			
+		/*	for(iter1 = sem.begin(); iter1 != sem.end(); iter1++){
 				cout << *iter1 << " ";
 			}
-			cout << endl << "-----------------------" << endl;
+			cout << endl << "-----------------------" << endl;*/
 			planWorks = checkPlan(myRequirements, map, sem);
 			if (!planWorks){
-
-				cout << "Bad plan!" << endl;
 				break;
 			}
 			total += updateTotal(myRequirements, map, sem);
@@ -353,8 +362,6 @@ int main(int argc, char **argv){
 			cout << endl << "-----------------------" << endl;
 			planWorks = checkPlan(myRequirements, map, sem);
 			if (!planWorks){
-
-				cout << "Bad plan!" << endl;
 				break;
 			}
 			total += updateTotal(myRequirements, map, sem);
@@ -366,7 +373,6 @@ int main(int argc, char **argv){
 			cout << endl << "-----------------------" << endl;
 			planWorks = checkPlan(myRequirements, map, sem);
 			if (!planWorks){
-				cout << "Bad plan!" << endl;
 				break;
 			}
 			total += updateTotal(myRequirements, map, sem);
@@ -378,7 +384,6 @@ int main(int argc, char **argv){
 			cout << endl << "-----------------------" << endl;
 			planWorks = checkPlan(myRequirements, map, sem);
 			if (!planWorks){
-				cout << "Bad plan!" << endl;
 				break;
 			}
 			total += updateTotal(myRequirements, map, sem);
@@ -390,7 +395,6 @@ int main(int argc, char **argv){
 			cout << endl << "-----------------------" << endl;
 			planWorks = checkPlan(myRequirements, map, sem);
 			if (!planWorks){
-				cout << "Bad plan!" << endl;
 				break;
 			}
 			total += updateTotal(myRequirements, map, sem);
@@ -402,7 +406,6 @@ int main(int argc, char **argv){
 			cout << endl << "-----------------------" << endl;
 			planWorks = checkPlan(myRequirements, map, sem);
 			if (!planWorks){
-				cout << "Bad plan!" << endl;
 				break;
 			}
 			total += updateTotal(myRequirements, map, sem);
@@ -414,7 +417,6 @@ int main(int argc, char **argv){
 			cout << endl << "-----------------------" << endl;
 			planWorks = checkPlan(myRequirements, map, sem);
 			if (!planWorks){
-				cout << "Bad plan!" << endl;
 				break;
 			}
 			total += updateTotal(myRequirements, map, sem);
@@ -432,6 +434,8 @@ int main(int argc, char **argv){
 				}
 			}
 			chooseCheck(myRequirements -> getChooseVec(), plan);
+		//	cout << "437" << endl;
+			planWorks = myRequirements -> checkMandRs();
 			break;
 		}
 		if (planWorks){

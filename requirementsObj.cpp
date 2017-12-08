@@ -94,7 +94,13 @@ void requirements:: findReqs(){
 		if ((*iter) -> getStatus() == "R"){
 			RCourses.push_back(*iter);
 		}
+		if ((*iter) -> getStatus() == "M"){
+			MCourses.push_back(*iter);
+		}
 	}
+/*	cout << "found reqs" << endl;
+	printAdjVec();
+	cout << "done printing" << endl;*/
 }
 
 void requirements:: addOffs(vector<string> courseOffs){
@@ -127,6 +133,10 @@ void requirements:: addOffs(vector<string> courseOffs){
 }
 
 bool requirements:: check(vector<string> semClasses){
+	vector<string>:: iterator iter2;
+/*	for (iter2 = semClasses.begin(); iter2 != semClasses.end(); iter2++){
+		cout << *iter2 << endl;
+	}*/
 	bool didPR;
 	vector<node*>:: iterator iter;
 	for (int i = 2; i < semClasses.size(); i++){
@@ -139,12 +149,43 @@ bool requirements:: check(vector<string> semClasses){
 		if (!didPR){
 			break;
 		}
+	//	cout << semClasses[i] << endl;
 	}
+//	cout << semClasses[1] << endl;
 	return didPR;
 }
 
-void requirements:: printAdjVec(){
-	
+bool requirements::checkMandRs(){
+	vector<node*>:: iterator iter;
+	bool tookMRs = true;
+	for (iter = RCourses.begin(); iter != RCourses.end(); iter++){
+	//	cout << "159" << endl;
+		if ((*iter) -> getTaken() == false){
+			tookMRs == false;
+			cout << "This schedule doesn't work because you did not take " << (*iter) -> getCourse() << " which is a required class" << endl;
+			break;
+		}
+	}
+	if (tookMRs){
+	//	cout << "size: " << MCourses.size() << endl;
+		for (iter = MCourses.begin(); iter != MCourses.end(); iter++){
+		//	cout << "168" << endl;
+		//	printAdjVec();
+		//	cout << "173" << endl;
+			if ((*iter) -> getTaken() == false){
+				tookMRs == false;
+				cout << "This schedule doesn't work because you did not take " << (*iter) -> getCourse() << " which is a mandatory class" << endl;
+				break;
+			}
+		//	cout << "after if" << endl;	
+		}
+	//	cout << "here" << endl;
+	}
+//	cout << "I" << endl;
+	return tookMRs;
+}
+
+void requirements:: printAdjVec(){	
 /*	cout << "------------------------------------------" << endl;
 	vector<node>:: iterator iter;
 	for (iter = adjVecCourses.begin(); iter != adjVecCourses.end(); iter++){
@@ -170,12 +211,11 @@ void requirements:: printAdjVec(){
 	vector<node*>:: iterator iter2;
 	for (iter2 = RCourses.begin(); iter2 != RCourses.end(); iter2++){
 		cout << "Pointer address: " << *iter2 << endl;
-		try{
-			(*iter2) -> print();
-		}
-		catch (bad_alloc& ba){
-			cerr << "bad alloc" << endl;
-		}
+		(*iter2) -> print();
+	}
+	cout << "Mandatory courses: " << endl;
+	for (iter2 = MCourses.begin(); iter2 != MCourses.end(); iter2++){
+		(*iter2) -> print();
 	}
 	cout << "---------------------------------------------" << endl;
 //	cout << "HOW" << endl;

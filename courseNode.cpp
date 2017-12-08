@@ -26,7 +26,7 @@ bool node:: checkPR(vector<string> sem){
 		node *post = *iter;
 		cout << "post req" << post -> getCourse() << endl;
 	}*/
-	cout << "c" << course << endl;
+//	cout << "c" << course << endl;
 
 	if (preReqs.size() != 0){
 		cout << "You cannot take " << course << "  because you must take these classes as prerequistes: ";
@@ -44,13 +44,13 @@ bool node:: checkPR(vector<string> sem){
 			for(iter = postReqs.begin(); iter != postReqs.end(); iter++){
 				node *post = *iter;
 
-				cout << "post node: " << post -> getCourse() << endl;
+			//	cout << "post node: " << post -> getCourse() << endl;
 
 				
 				if(post -> getCourse() == myClass && myClass != course){
-					cout << "mypost " << post -> getCourse() << endl;
+				/*	cout << "mypost " << post -> getCourse() << endl;
 					cout << "myclass " << myClass << endl;
-					cout << "course " << course << endl;
+					cout << "course " << course << endl;*/
 					cout << "You cannot take " << myClass << " at the same time as " << course << endl;
 					didPR = false;
 					break;	
@@ -67,7 +67,7 @@ bool node:: checkPR(vector<string> sem){
 		for (iter = postReqs.begin(); iter != postReqs.end(); iter++){
 			(*iter) -> delPreReq(course);
 		}
-		didPR = true;
+		taken = true;
 	}
 //	cout << "in course node " << didPR << endl;
 	return didPR;
@@ -133,6 +133,10 @@ int node:: getPostLength(){
 
 int node:: getPreLength(){
 	return preLength;
+}
+
+bool node:: getTaken(){
+	return taken;
 }
 
 void node:: setStatus(string s){

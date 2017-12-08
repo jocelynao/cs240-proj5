@@ -11,6 +11,7 @@ class node{
 	private:
 		int postLength = 0;
 		int preLength = 0;
+		bool taken = false;
 		string course;
 		string status;
 		vector<node*> postReqs;
@@ -30,6 +31,7 @@ class node{
 		string getStatus();
 		int getPostLength();
 		int getPreLength();
+		bool getTaken();
 
 		void setStatus(string s);
 
