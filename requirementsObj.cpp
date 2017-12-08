@@ -4,31 +4,31 @@
 #include <new>
 #include "requirementsObj.h"
 #include "courseNode.h"
+#include "chooseObj.h"
 
 using namespace std;
 
 void requirements:: setCourses(vector<string> reqLine){
 	if (reqLine[0] == "TOTAL"){
 		setTotal(stoi(reqLine[1]));
-	//	cout << getTotal() << endl;
-
 	}
 	else if(reqLine[0] == "CREDIT"){
 		credit newCred(reqLine[1], stoi(reqLine[2]));
 		creds.push_back(newCred);
-	//	vector<credit>:: iterator cIter;
-	/*	for (cIter = creds.begin(); cIter != creds.end(); cIter++){
-			cot << cIter -> getName() << ", ";
-		}
-		cout << "\n" << endl;*/
-
 	}
 	else if(reqLine[0] == "COURSE"){
 		makeNode(reqLine);
-	//	printAdjVec();	
+	}
+	else if(reqLine[0] == "CHOOSE"){
+		chooseVec.push_back(move(new choose(reqLine)));
+		cout << "size: " << chooseVec.size() << endl;
 	}
 	else{
+		cout << "LINE ERROR!" << endl;
 	}
+}
+vector<choose*> requirements::getChooseVec(){
+	return chooseVec;
 }
 
 bool requirements::alreadyIn(vector<string> vec){

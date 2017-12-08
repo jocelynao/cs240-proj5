@@ -6,6 +6,7 @@
 #include <vector>
 #include "credit.h"
 #include "courseNode.h"
+#include "chooseObj.h"
 
 using namespace std;
 
@@ -15,6 +16,7 @@ class requirements{
 		vector<credit> creds;
 		vector<node*> adjVecCourses;
 		vector<node*> RCourses;
+		vector<choose*> chooseVec;
 	public:
 		void menu(vector<string> vec);
 		void makeNode(vector<string> vec);
@@ -28,7 +30,8 @@ class requirements{
 		bool check(vector<string> semClasses);
 		void setTotal(int n);
 		int getTotal();
-		vector<credit> getCreds();	
+		vector<credit> getCreds();
+		vector<choose*> getChooseVec();	
 };
 
 #endif

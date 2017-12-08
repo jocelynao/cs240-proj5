@@ -67,7 +67,7 @@ planned::planned(string fileName){
 			else if(counter == 6){
 				addSem7(line);
 			}
-			else{
+			else if(counter == 7){
 				addSem8(line);
 			}
 			counter++;
