@@ -26,7 +26,7 @@ bool node:: checkPR(){
 		}
 		cout << "\n" << endl;
 	}
-	else{
+	if (!didPR){
 	//	cout << course << endl;
 		for (iter = postReqs.begin(); iter != postReqs.end(); iter++){
 			(*iter) -> delPreReq(course);

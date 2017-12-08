@@ -65,67 +65,53 @@ bool chooseCheck(vector<choose*> myChoose, planned *plan){
 
 		vector<string>::iterator iter2;
 		for(iter1 = classes.begin(); iter1 != classes.end(); iter1++){
-			cout << "---------------------------------------" << endl;
 			/* checks through each of the semesters for the specified class */
 			vector<string> sem = plan -> getSem1();
 			string comp1 = *iter1;
 			for(iter2 = sem.begin(); iter2 != sem.end(); iter2++){
 				string comp2 = *iter2;
-				cout << "comparing" << comp1 << " " << comp2 << endl;
 				if(comp1 == comp2){
 					taken.push_back(comp2);
 				}
 			}
-			cout << "--------" << endl;
 			sem = plan -> getSem2();			
 			for(iter2 = sem.begin(); iter2 != sem.end(); iter2++){
 				string comp2 = *iter2;
-				cout << "comparing" << comp1 << " " << comp2 << endl;
 				if(comp1 == comp2){
 					taken.push_back(comp2);
 				}
 			}
-			cout << "--------" << endl;
 			sem = plan -> getSem3();			
 			for(iter2 = sem.begin(); iter2 != sem.end(); iter2++){
 				string comp2 = *iter2;
-				cout << "comparing" << comp1 << " " << comp2 << endl;
 				if(comp1 == comp2){
 					taken.push_back(comp2);
 				}
 			}
-			cout << "--------" << endl;
 			sem = plan -> getSem4();			
 			for(iter2 = sem.begin(); iter2 != sem.end(); iter2++){
 				string comp2 = *iter2;
-				cout << "comparing" << comp1 << " " << comp2 << endl;
 				if(comp1 == comp2){
 					taken.push_back(comp2);
 				}
 			}
-			cout << "--------" << endl;
 			sem = plan -> getSem5();			
 			for(iter2 = sem.begin(); iter2 != sem.end(); iter2++){
 				string comp2 = *iter2;
-				cout << "comparing" << comp1 << " " << comp2 << endl;
 				if(comp1 == comp2){
 					taken.push_back(comp2);
 				}
 			}
-			cout << "--------" << endl;
 			sem = plan -> getSem6();			
 			for(iter2 = sem.begin(); iter2 != sem.end(); iter2++){
 				string comp2 = *iter2;
-				cout << "comparing" << comp1 << " " << comp2 << endl;
 				if(comp1 == comp2){
 					taken.push_back(comp2);
 				}
 			}
-			cout << "--------" << endl;
 			sem = plan -> getSem7();			
 			for(iter2 = sem.begin(); iter2 != sem.end(); iter2++){
 				string comp2 = *iter2;
-				cout << "comparing" << comp1 << " " << comp2 << endl;
 				if(comp1 == comp2){
 					taken.push_back(comp2);
 				}
@@ -134,13 +120,10 @@ bool chooseCheck(vector<choose*> myChoose, planned *plan){
 			sem = plan -> getSem8();			
 			for(iter2 = sem.begin(); iter2 != sem.end(); iter2++){
 				string comp2 = *iter2;
-				cout << "comparing" << comp1 << " " << comp2 << endl;
 				if(comp1 == comp2){
 					taken.push_back(comp2);
 				}
 			}
-			cout << endl;
-
 		}
 		if(taken.size() < amount){
 			cout << "This schedule doesn't work because you need at least " << amount << " of the following classes: ";
@@ -159,6 +142,124 @@ bool chooseCheck(vector<choose*> myChoose, planned *plan){
 	
 	return planWorks;
 }
+bool validClasses(requirements *myRequirements, unordered_map<string, offerings*> offeringsMap, planned *plan){
+	bool planWorks = true;
+	unordered_map<string, int> taken;
+	vector<string> sem = plan -> getSem1();
+	for(int i = 2; i < sem.size(); i++){
+		if(offeringsMap.find(sem[i]) == offeringsMap.end()){
+			cout << "This schedule doesn't work because " << sem[i] << " does not exist." << endl;
+			return false;
+		}else{
+			if(taken.find(sem[i]) == taken.end()){
+				taken.insert(make_pair(sem[i], 0));
+			}else{
+				cout << "This schedule doesn't work because you inputted " << sem[i] << " more than once." << endl;
+				return false;
+			}
+		}
+	}
+	sem = plan -> getSem2();
+	for(int i = 2; i < sem.size(); i++){
+		if(offeringsMap.find(sem[i]) == offeringsMap.end()){
+			cout << "This schedule doesn't work because " << sem[i] << " does not exist." << endl;
+			return false;
+		}else{
+			if(taken.find(sem[i]) == taken.end()){
+				taken.insert(make_pair(sem[i], 0));
+			}else{
+				cout << "This schedule doesn't work because you inputted " << sem[i] << " more than once." << endl;
+				return false;
+			}
+		}
+	}
+	sem = plan -> getSem3();
+	for(int i = 2; i < sem.size(); i++){
+		if(offeringsMap.find(sem[i]) == offeringsMap.end()){
+			cout << "This schedule doesn't work because " << sem[i] << " does not exist." << endl;
+			return false;
+		}else{
+			if(taken.find(sem[i]) == taken.end()){
+				taken.insert(make_pair(sem[i], 0));
+			}else{
+				cout << "This schedule doesn't work because you inputted " << sem[i] << " more than once." << endl;
+				return false;
+			}
+		}
+	}
+	sem = plan -> getSem4();
+	for(int i = 2; i < sem.size(); i++){
+		if(offeringsMap.find(sem[i]) == offeringsMap.end()){
+			cout << "This schedule doesn't work because " << sem[i] << " does not exist." << endl;
+			return false;
+		}else{
+			if(taken.find(sem[i]) == taken.end()){
+				taken.insert(make_pair(sem[i], 0));
+			}else{
+				cout << "This schedule doesn't work because you inputted " << sem[i] << " more than once." << endl;
+				return false;	
+			}
+		}
+	}
+	sem = plan -> getSem5();
+	for(int i = 2; i < sem.size(); i++){
+		if(offeringsMap.find(sem[i]) == offeringsMap.end()){
+			cout << "This schedule doesn't work because " << sem[i] << " does not exist." << endl;
+			return false;
+		}else{
+			if(taken.find(sem[i]) == taken.end()){
+				taken.insert(make_pair(sem[i], 0));
+			}else{
+				cout << "This schedule doesn't work because you inputted " << sem[i] << " more than once." << endl;
+				return false;
+			}
+		}
+	}
+	sem = plan -> getSem6();
+	for(int i = 2; i < sem.size(); i++){
+		if(offeringsMap.find(sem[i]) == offeringsMap.end()){
+			cout << "This schedule doesn't work because " << sem[i] << " does not exist." << endl;
+			return false;
+		}else{
+			if(taken.find(sem[i]) == taken.end()){
+				taken.insert(make_pair(sem[i], 0));
+			}else{
+				cout << "This schedule doesn't work because you inputted " << sem[i] << " more than once." << endl;
+				return false;
+			}
+		}
+	}
+	sem = plan -> getSem7();
+	for(int i = 2; i < sem.size(); i++){
+		if(offeringsMap.find(sem[i]) == offeringsMap.end()){
+			cout << "This schedule doesn't work because " << sem[i] << " does not exist." << endl;
+			return false;
+		}else{
+			if(taken.find(sem[i]) == taken.end()){
+				taken.insert(make_pair(sem[i], 0));
+			}else{
+				cout << "This schedule doesn't work because you inputted " << sem[i] << " more than once." << endl;
+				return false;
+			}
+		}
+	}
+	sem = plan -> getSem8();
+	for(int i = 2; i < sem.size(); i++){
+		if(offeringsMap.find(sem[i]) == offeringsMap.end()){
+			cout << "This schedule doesn't work because " << sem[i] << " does not exist." << endl;
+			return false;
+		}else{
+			if(taken.find(sem[i]) == taken.end()){
+				taken.insert(make_pair(sem[i], 0));
+			}else{
+				cout << "This schedule doesn't work because you inputted " << sem[i] << " more than once." << endl;
+				return false;
+			}
+		}
+	}
+
+	return planWorks;
+}
 
 bool checkPlan(requirements *myRequirements, unordered_map<string, offerings*> map, vector<string> sem){
 		bool planWorks = true;
@@ -166,21 +267,17 @@ bool checkPlan(requirements *myRequirements, unordered_map<string, offerings*> m
 		vector<string>:: iterator iter;
 		while (planWorks){
 			for (int i = 2; i < sem.size(); i++){
-				if(map.find(sem[i]) == map.end()){
+
+				if(map[sem[i]] -> getTerm() != sem[0] && 
+						map[sem[i]] -> getTerm() != "E"){
+					if(sem[0] == "F"){
+						cout << "This schedule doesn't work because " << sem[i] << " can only be taken during the spring semester and you're trying to take it in " << sem[1] << endl;
+					}
+					else{
+						cout << "This schedule doesn't work because " << sem[i] << " can only be taken during the fall semester and you're trying to take it in " << sem[1] << endl;
+					}
 					planWorks = false;
 					break;
-				}else{
-					if(map[sem[i]] -> getTerm() != sem[0] && 
-							map[sem[i]] -> getTerm() != "E"){
-						if(sem[0] == "F"){
-							cout << "This schedule doesn't work because " << sem[i] << " can only be taken during the spring semester and you're trying to take it in " << sem[1] << endl;
-						}
-						else{
-							cout << "This schedule doesn't work because " << sem[i] << " can only be taken during the fall semester and you're trying to take it in " << sem[1] << endl;
-						}
-						planWorks = false;
-						break;
-					}
 				}	
 			}
 
@@ -224,11 +321,11 @@ int main(int argc, char **argv){
 		while(planWorks){
 			vector<string> sem = plan -> getSem1();
 			vector<string>::iterator iter1;
-			cout << "-----------------------" << endl;
-			for(iter1 = sem.begin(); iter1 != sem.end(); iter1++){
-				cout << *iter1 << " ";
+			planWorks = validClasses(myRequirements, map, plan);
+			if(!planWorks){
+				cout << "Bad plan!" << endl;
+				break;
 			}
-			cout << endl << "-----------------------" << endl;
 			planWorks = checkPlan(myRequirements, map, sem);
 			if (!planWorks){
 				cout << "Bad plan!" << endl;
