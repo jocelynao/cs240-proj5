@@ -459,6 +459,14 @@ int main(int argc, char **argv){
 			cout << "Your schedule is good" << endl;
 			cout << "total credits: " << total << endl;
 		}
+		
+		oparser -> deleteAll();
+		delete oparser;
+		parser -> deleteAll();
+		delete parser;
+		delete plan;
+		
+
 			//	myRequirements -> check(firstSem);
 
 	//	(parser -> getRequirements()) -> printAdjVec();
