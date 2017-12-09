@@ -325,9 +325,11 @@ int main(int argc, char **argv){
 		unordered_map<string, offerings*> map = oparser -> getMap();
 		vector<credit> myCred = myRequirements -> getCreds();
 
+		
+		bool planWorks = true;
 		planned *plan = new planned(argv[3]);
 	//	cout << "323" << endl;
-		bool planWorks = true;
+		planWorks = plan -> getValid();
 		bool checkedAll = false;
 		while(planWorks){
 			vector<string> sem = plan -> getSem1();

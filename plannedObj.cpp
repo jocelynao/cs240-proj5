@@ -46,7 +46,7 @@ planned::planned(string fileName){
 		}
 		bool error = true;
 		for(int j = 1; j < dont_check.size(); j++){
-			if(dont_check[j] == dont_check[j-1]){
+			if(dict[dont_check[j]] == dict[dont_check[j-1]]){
 				error = false;
 				cout << "ERROR: You must have exactly 8 semesters without any repeats!" << endl;
 				break;
