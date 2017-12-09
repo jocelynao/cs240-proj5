@@ -45,9 +45,18 @@ bool requirements::alreadyIn(vector<string> vec){
 }
 
 void requirements:: makeNode(vector<string> vec){
-	node *newNode;
-	newNode = new node(vec[1], vec[2]);
-	adjVecCourses.push_back(newNode);
+	bool alreadyIn = false;
+	vector<node*>:: iterator iter;
+	for (iter = adjVecCourses.begin(); iter != adjVecCourses.end(); iter++){
+		if ((*iter) -> getCourse() == vec[1]){
+			alreadyIn = true;
+		}
+	}
+	if (!alreadyIn){
+		node *newNode;
+		newNode = new node(vec[1], vec[2]);
+		adjVecCourses.push_back(newNode);
+	}
 }
 
 void requirements:: addReqs(vector<string> reqLine){
@@ -162,7 +171,7 @@ bool requirements::checkMandRs(){
 	for (iter = RCourses.begin(); iter != RCourses.end(); iter++){
 	//	cout << "159" << endl;
 		if ((*iter) -> getTaken() == false){
-			tookMRs == false;
+			tookMRs = false;
 			cout << "This schedule doesn't work because you did not take " << (*iter) -> getCourse() << " which is a required class" << endl;
 			break;
 		}
@@ -174,15 +183,12 @@ bool requirements::checkMandRs(){
 		//	printAdjVec();
 		//	cout << "173" << endl;
 			if ((*iter) -> getTaken() == false){
-				tookMRs == false;
-				cout << "This schedule doesn't work because you did not take " << (*iter) -> getCourse() << " which is a mandatory class" << endl;
+				tookMRs = false;
+				cout << "This schedule doesn't work because you did not take " << (*iter) -> getCourse() << " which is a mandatory class" << endl;		
 				break;
-			}
-		//	cout << "after if" << endl;	
+			}	
 		}
-	//	cout << "here" << endl;
 	}
-//	cout << "I" << endl;
 	return tookMRs;
 }
 

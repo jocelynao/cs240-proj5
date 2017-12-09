@@ -55,10 +55,11 @@ bool chooseCheck(vector<choose*> myChoose, planned *plan){
 	bool planWorks = true;
 	vector<choose*>::iterator iter;
 	int amount = 0;
+//	cout << "58" << endl;
 	for(iter = myChoose.begin(); iter != myChoose.end(); iter++){
 		choose *choosing = *iter;
 		amount = choosing -> getAmount();
-		cout << "amount: " << choosing -> getAmount() << endl;
+	//	cout << "amount: " << choosing -> getAmount() << endl;
 		vector<string> classes = choosing -> getClass();
 		vector<string>::iterator iter1;
 		vector<string> taken;
@@ -95,6 +96,7 @@ bool chooseCheck(vector<choose*> myChoose, planned *plan){
 					taken.push_back(comp2);
 				}
 			}
+		//	cout << "99" << endl;
 			sem = plan -> getSem5();			
 			for(iter2 = sem.begin(); iter2 != sem.end(); iter2++){
 				string comp2 = *iter2;
@@ -102,6 +104,7 @@ bool chooseCheck(vector<choose*> myChoose, planned *plan){
 					taken.push_back(comp2);
 				}
 			}
+		//	cout << "106" << endl;
 			sem = plan -> getSem6();			
 			for(iter2 = sem.begin(); iter2 != sem.end(); iter2++){
 				string comp2 = *iter2;
@@ -116,7 +119,7 @@ bool chooseCheck(vector<choose*> myChoose, planned *plan){
 					taken.push_back(comp2);
 				}
 			}
-			cout << endl;
+		//	cout << endl;
 			sem = plan -> getSem8();			
 			for(iter2 = sem.begin(); iter2 != sem.end(); iter2++){
 				string comp2 = *iter2;
@@ -360,10 +363,10 @@ int main(int argc, char **argv){
 			total += updateTotal(myRequirements, map, sem);
 			myCred = genEdCheck(myRequirements, map, sem, myCred);
 			sem = plan -> getSem3();		
-			for(iter1 = sem.begin(); iter1 != sem.end(); iter1++){
+		/*	for(iter1 = sem.begin(); iter1 != sem.end(); iter1++){
 				cout << *iter1 << " ";
 			}
-			cout << endl << "-----------------------" << endl;
+			cout << endl << "-----------------------" << endl;*/
 			planWorks = checkPlan(myRequirements, map, sem);
 			if (!planWorks){
 				break;
@@ -371,10 +374,10 @@ int main(int argc, char **argv){
 			total += updateTotal(myRequirements, map, sem);
 			myCred = genEdCheck(myRequirements, map, sem, myCred);
 			sem = plan -> getSem4();			
-			for(iter1 = sem.begin(); iter1 != sem.end(); iter1++){
+		/*	for(iter1 = sem.begin(); iter1 != sem.end(); iter1++){
 				cout << *iter1 << " ";
 			}
-			cout << endl << "-----------------------" << endl;
+			cout << endl << "-----------------------" << endl;*/
 			planWorks = checkPlan(myRequirements, map, sem);
 			if (!planWorks){
 				break;
@@ -382,10 +385,10 @@ int main(int argc, char **argv){
 			total += updateTotal(myRequirements, map, sem);
 			myCred = genEdCheck(myRequirements, map, sem, myCred);
 			sem = plan -> getSem5();
-			for(iter1 = sem.begin(); iter1 != sem.end(); iter1++){
+		/*	for(iter1 = sem.begin(); iter1 != sem.end(); iter1++){
 				cout << *iter1 << " ";
 			}
-			cout << endl << "-----------------------" << endl;
+			cout << endl << "-----------------------" << endl;*/
 			planWorks = checkPlan(myRequirements, map, sem);
 			if (!planWorks){
 				break;
@@ -393,10 +396,10 @@ int main(int argc, char **argv){
 			total += updateTotal(myRequirements, map, sem);
 			myCred = genEdCheck(myRequirements, map, sem, myCred);
 			sem = plan -> getSem6();
-			for(iter1 = sem.begin(); iter1 != sem.end(); iter1++){
+		/*	for(iter1 = sem.begin(); iter1 != sem.end(); iter1++){
 				cout << *iter1 << " ";
 			}
-			cout << endl << "-----------------------" << endl;
+			cout << endl << "-----------------------" << endl;*/
 			planWorks = checkPlan(myRequirements, map, sem);
 			if (!planWorks){
 				break;
@@ -404,26 +407,28 @@ int main(int argc, char **argv){
 			total += updateTotal(myRequirements, map, sem);
 			myCred = genEdCheck(myRequirements, map, sem, myCred);
 			sem = plan -> getSem7();
-			for(iter1 = sem.begin(); iter1 != sem.end(); iter1++){
+		/*	for(iter1 = sem.begin(); iter1 != sem.end(); iter1++){
 				cout << *iter1 << " ";
 			}
-			cout << endl << "-----------------------" << endl;
+			cout << endl << "-----------------------" << endl;*/
 			planWorks = checkPlan(myRequirements, map, sem);
 			if (!planWorks){
 				break;
 			}
+		//	cout << "415" << endl;
 			total += updateTotal(myRequirements, map, sem);
 			myCred = genEdCheck(myRequirements, map, sem, myCred);
 			sem = plan -> getSem8();
-			for(iter1 = sem.begin(); iter1 != sem.end(); iter1++){
+		/*	for(iter1 = sem.begin(); iter1 != sem.end(); iter1++){
 				cout << *iter1 << " ";
 			}
-			cout << endl << "-----------------------" << endl;
+			cout << endl << "-----------------------" << endl;*/
 			planWorks = checkPlan(myRequirements, map, sem);
 			checkedAll = true;
 			if (!planWorks){
 				break;
 			}
+		//	cout << "428" << endl;
 			total += updateTotal(myRequirements, map, sem);
 			myCred = genEdCheck(myRequirements, map, sem, myCred);
 			if(total < myRequirements -> getTotal()){
@@ -441,13 +446,14 @@ int main(int argc, char **argv){
 					break;
 				}
 			}
+		//	cout << "446" << endl;
 			if (!planWorks){
 				break;
 			}
 			planWorks = chooseCheck(myRequirements -> getChooseVec(), plan);
 		//	cout << "437" << endl;
 			if (planWorks){
-			//	cout << "444" << endl;
+		//		cout << "444" << endl;
 				planWorks = myRequirements -> checkMandRs();
 			}
 			break;
