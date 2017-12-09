@@ -313,46 +313,32 @@ int main(int argc, char **argv){
 				exit(0);
 			}
 		}
-	//	cout << "315" << endl;	
 		requirementsParser *parser = new requirementsParser(argv[1]);
-	//	cout << "318" << endl;
 		requirements *myRequirements = parser -> getRequirements();
 		offeringsParser *oparser = new offeringsParser(argv[2], myRequirements);
-	//	cout << "320" << endl;
 		unordered_map<string, offerings*> map = oparser -> getMap();
 		vector<credit> myCred = myRequirements -> getCreds();
 
 		planned *plan = new planned(argv[3]);
-	//	cout << "323" << endl;
 		bool planWorks = true;
 		bool checkedAll = false;
 		while(planWorks){
 			vector<string> sem = plan -> getSem1();
 			vector<string>::iterator iter1;
-		/*	for (iter1 = sem.begin(); iter1 != sem.end(); iter1++){
-				cout << *iter1 << endl;
-			}*/
-		//	cout <<"done" << endl;
+
 			planWorks = validClasses(myRequirements, map, plan);
-		//	cout << "HERE" << endl;
 			if(!planWorks){
-			//	cout << "here" << endl;
 				break;
 			}
 			planWorks = checkPlan(myRequirements, map, sem);
-		//	cout << "HI" << endl;
-		//	cout << "here" << endl;
+
 			if (!planWorks){
 				break;
 			}
 			total += updateTotal(myRequirements, map, sem);
 			myCred = genEdCheck(myRequirements, map, sem, myCred);
 			sem = plan -> getSem2();
-		//	cout << "here2" << endl;			
-		/*	for(iter1 = sem.begin(); iter1 != sem.end(); iter1++){
-				cout << *iter1 << " ";
-			}
-			cout << endl << "-----------------------" << endl;*/
+
 			planWorks = checkPlan(myRequirements, map, sem);
 			if (!planWorks){
 				break;
@@ -439,7 +425,6 @@ int main(int argc, char **argv){
 				}
 			}
 			chooseCheck(myRequirements -> getChooseVec(), plan);
-		//	cout << "437" << endl;
 			planWorks = myRequirements -> checkMandRs();
 			break;
 		}
@@ -450,30 +435,11 @@ int main(int argc, char **argv){
 			cout << "Your schedule is good" << endl;
 			cout << "total credits: " << total << endl;
 		}
-			//	myRequirements -> check(firstSem);
-
-	//	(parser -> getRequirements()) -> printAdjVec();
-		/*
-		unordered_map<string, offerings*> offersMap;
-		offeringsParser *offers = new offeringsParser(argv[2]);
-		offersMap = offers -> getMap();
-		
-		auto search = offersMap.find("AN301");
-		if(search != offersMap.end()){
-			cout << "Found " << search -> first << " : " << search -> second -> getCredits();
-		}
-
-		vector<string> plannedTest;
-		vector<string>::iterator iter;
-		planned *plan = new planned(argv[3]);
-		plannedTest = plan -> getF19();
-		cout << endl << endl;
-
-		for(iter = plannedTest.begin(); iter != plannedTest.end(); iter++){
-			cout << *iter << ", "; 
-		}
-		cout << endl;
-		*/
+		oparser -> deleteAll();
+		delete oparser;
+		parser -> deleteAll();
+		delete parser;
+		delete plan;
 		
 	}
 	return 0;

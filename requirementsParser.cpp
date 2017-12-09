@@ -9,6 +9,10 @@
 
 using namespace std;
 
+void requirementsParser::deleteAll(){
+	delete myRequirements;
+}
+
 requirementsParser::requirementsParser(string fileName){
 	myRequirements = new requirements();
 	ifstream file(fileName);

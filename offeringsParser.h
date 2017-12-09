@@ -8,6 +8,7 @@ using namespace std;
 
 class offeringsParser{
 	public:
+		void deleteAll();
 		offeringsParser(string fileName, requirements *myRequirements);
 		unordered_map<string, offerings*> getMap();
 	private:

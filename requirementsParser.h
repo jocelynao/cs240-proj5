@@ -10,6 +10,7 @@ using namespace std;
 
 class requirementsParser{
 	public:
+		void deleteAll();
 		requirementsParser(string fileName);
 		requirements *getRequirements();
 	private:

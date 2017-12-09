@@ -9,8 +9,14 @@
 
 using namespace std;
 
+void offeringsParser::deleteAll(){
+	unordered_map<string, offerings*>::iterator iter;
+	for(iter = offeringsMap.begin(); iter != offeringsMap.end(); iter++){
+		delete iter -> second;
+	}
+}
+
 offeringsParser::offeringsParser(string fileName, requirements *myRequirements){
-//	myRequirements -> printAdjVec();
 	ifstream file(fileName);
 	string str;
 	bool found;
@@ -27,7 +33,6 @@ offeringsParser::offeringsParser(string fileName, requirements *myRequirements){
 		myRequirements -> addOffs(addAdj);
 		addAdj.clear();
 	}
-	/*myRequirements -> printAdjVec();*/
 }
 
 unordered_map<string, offerings*> offeringsParser::getMap(){

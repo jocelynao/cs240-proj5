@@ -234,7 +234,7 @@ vector<credit> requirements:: getCreds(){
 	return creds;
 }
 
-requirements:: ~requirements(){
+requirements::~requirements(){
 	vector<node*>:: iterator iter;
 	for (iter = RCourses.begin(); iter != RCourses.end(); iter++){
 		(*iter) = NULL;
@@ -244,6 +244,10 @@ requirements:: ~requirements(){
 	}
 	for (iter = adjVecCourses.begin(); iter != adjVecCourses.end(); iter++){
 		delete *iter;
+	}
+	vector<choose*>::iterator iter1;
+	for(iter1 = chooseVec.begin(); iter1 != chooseVec.end(); iter1++){
+		delete *iter1;
 	}
 	adjVecCourses.clear();
 }
