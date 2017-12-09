@@ -8,6 +8,8 @@ using namespace std;
 
 class planned{
 	public:
+		void valid(bool isValid);
+		bool getValid();
 		planned(string myFile);
 		void addSem1(string Sem1);
 		vector<string> getSem1();		
@@ -26,6 +28,7 @@ class planned{
 		void addSem8(string Sem8);
 		vector<string> getSem8();
 	private:
+		bool validity;
 		vector<string> sem1 = {"F"};
 		vector<string> sem2 = {"S"};
 		vector<string> sem3 = {"F"};
