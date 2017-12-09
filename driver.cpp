@@ -148,7 +148,7 @@ bool validClasses(requirements *myRequirements, unordered_map<string, offerings*
 	vector<string> sem = plan -> getSem1();
 	for(int i = 2; i < sem.size(); i++){
 		if(offeringsMap.find(sem[i]) == offeringsMap.end()){
-			cout << "This schedule doesn't work because " << sem[i] << " is not offered." << endl;
+			cout << "This schedule doesn't work because " << sem[i] << " does not exist in the course offerings." << endl;
 			return false;
 		}else{
 			if(taken.find(sem[i]) == taken.end()){
@@ -162,7 +162,7 @@ bool validClasses(requirements *myRequirements, unordered_map<string, offerings*
 	sem = plan -> getSem2();
 	for(int i = 2; i < sem.size(); i++){
 		if(offeringsMap.find(sem[i]) == offeringsMap.end()){
-			cout << "This schedule doesn't work because " << sem[i] << " does not exist." << endl;
+			cout << "This schedule doesn't work because " << sem[i] << " does not exist in the course offerings." << endl;
 			return false;
 		}else{
 			if(taken.find(sem[i]) == taken.end()){
@@ -176,7 +176,7 @@ bool validClasses(requirements *myRequirements, unordered_map<string, offerings*
 	sem = plan -> getSem3();
 	for(int i = 2; i < sem.size(); i++){
 		if(offeringsMap.find(sem[i]) == offeringsMap.end()){
-			cout << "This schedule doesn't work because " << sem[i] << " does not exist." << endl;
+			cout << "This schedule doesn't work because " << sem[i] << " does not exist in the course offerings." << endl;
 			return false;
 		}else{
 			if(taken.find(sem[i]) == taken.end()){
@@ -190,7 +190,7 @@ bool validClasses(requirements *myRequirements, unordered_map<string, offerings*
 	sem = plan -> getSem4();
 	for(int i = 2; i < sem.size(); i++){
 		if(offeringsMap.find(sem[i]) == offeringsMap.end()){
-			cout << "This schedule doesn't work because " << sem[i] << " does not exist." << endl;
+			cout << "This schedule doesn't work because " << sem[i] << " does not exist in the course offerings." << endl;
 			return false;
 		}else{
 			if(taken.find(sem[i]) == taken.end()){
@@ -204,7 +204,7 @@ bool validClasses(requirements *myRequirements, unordered_map<string, offerings*
 	sem = plan -> getSem5();
 	for(int i = 2; i < sem.size(); i++){
 		if(offeringsMap.find(sem[i]) == offeringsMap.end()){
-			cout << "This schedule doesn't work because " << sem[i] << " does not exist." << endl;
+			cout << "This schedule doesn't work because " << sem[i] << " does not exist in the course offerings." << endl;
 			return false;
 		}else{
 			if(taken.find(sem[i]) == taken.end()){
@@ -218,7 +218,7 @@ bool validClasses(requirements *myRequirements, unordered_map<string, offerings*
 	sem = plan -> getSem6();
 	for(int i = 2; i < sem.size(); i++){
 		if(offeringsMap.find(sem[i]) == offeringsMap.end()){
-			cout << "This schedule doesn't work because " << sem[i] << " does not exist." << endl;
+			cout << "This schedule doesn't work because " << sem[i] << " does not exist in the course offerings" << endl;
 			return false;
 		}else{
 			if(taken.find(sem[i]) == taken.end()){
@@ -232,7 +232,7 @@ bool validClasses(requirements *myRequirements, unordered_map<string, offerings*
 	sem = plan -> getSem7();
 	for(int i = 2; i < sem.size(); i++){
 		if(offeringsMap.find(sem[i]) == offeringsMap.end()){
-			cout << "This schedule doesn't work because " << sem[i] << " does not exist." << endl;
+			cout << "This schedule doesn't work because " << sem[i] << " does not exist in the course offerings." << endl;
 			return false;
 		}else{
 			if(taken.find(sem[i]) == taken.end()){
@@ -246,7 +246,7 @@ bool validClasses(requirements *myRequirements, unordered_map<string, offerings*
 	sem = plan -> getSem8();
 	for(int i = 2; i < sem.size(); i++){
 		if(offeringsMap.find(sem[i]) == offeringsMap.end()){
-			cout << "This schedule doesn't work because " << sem[i] << " does not exist." << endl;
+			cout << "This schedule doesn't work because " << sem[i] << " does not exist in the course offerings." << endl;
 			return false;
 		}else{
 			if(taken.find(sem[i]) == taken.end()){
@@ -313,32 +313,46 @@ int main(int argc, char **argv){
 				exit(0);
 			}
 		}
+	//	cout << "315" << endl;	
 		requirementsParser *parser = new requirementsParser(argv[1]);
+	//	cout << "318" << endl;
 		requirements *myRequirements = parser -> getRequirements();
 		offeringsParser *oparser = new offeringsParser(argv[2], myRequirements);
+	//	cout << "320" << endl;
 		unordered_map<string, offerings*> map = oparser -> getMap();
 		vector<credit> myCred = myRequirements -> getCreds();
 
 		planned *plan = new planned(argv[3]);
+	//	cout << "323" << endl;
 		bool planWorks = true;
 		bool checkedAll = false;
 		while(planWorks){
 			vector<string> sem = plan -> getSem1();
 			vector<string>::iterator iter1;
-
+		/*	for (iter1 = sem.begin(); iter1 != sem.end(); iter1++){
+				cout << *iter1 << endl;
+			}*/
+		//	cout <<"done" << endl;
 			planWorks = validClasses(myRequirements, map, plan);
+		//	cout << "HERE" << endl;
 			if(!planWorks){
+			//	cout << "here" << endl;
 				break;
 			}
 			planWorks = checkPlan(myRequirements, map, sem);
-
+		//	cout << "HI" << endl;
+		//	cout << "here" << endl;
 			if (!planWorks){
 				break;
 			}
 			total += updateTotal(myRequirements, map, sem);
 			myCred = genEdCheck(myRequirements, map, sem, myCred);
 			sem = plan -> getSem2();
-
+		//	cout << "here2" << endl;			
+		/*	for(iter1 = sem.begin(); iter1 != sem.end(); iter1++){
+				cout << *iter1 << " ";
+			}
+			cout << endl << "-----------------------" << endl;*/
 			planWorks = checkPlan(myRequirements, map, sem);
 			if (!planWorks){
 				break;
@@ -414,8 +428,11 @@ int main(int argc, char **argv){
 			myCred = genEdCheck(myRequirements, map, sem, myCred);
 			if(total < myRequirements -> getTotal()){
 				cout << "Bad plan! You need " << myRequirements -> getTotal() << " credits to graduate, but you only have " << total << endl;
+				planWorks = false;
+			//	cout << "432" << endl;
 				break;
 			}
+		//	cout << "435" << endl;
 			vector<credit>::iterator iter;
 			for(iter = myCred.begin(); iter != myCred.end(); iter++){
 				if(iter -> getAmount() < iter -> getNum()){
@@ -424,8 +441,15 @@ int main(int argc, char **argv){
 					break;
 				}
 			}
-			chooseCheck(myRequirements -> getChooseVec(), plan);
-			planWorks = myRequirements -> checkMandRs();
+			if (!planWorks){
+				break;
+			}
+			planWorks = chooseCheck(myRequirements -> getChooseVec(), plan);
+		//	cout << "437" << endl;
+			if (planWorks){
+			//	cout << "444" << endl;
+				planWorks = myRequirements -> checkMandRs();
+			}
 			break;
 		}
 		if (!checkedAll){
@@ -435,11 +459,30 @@ int main(int argc, char **argv){
 			cout << "Your schedule is good" << endl;
 			cout << "total credits: " << total << endl;
 		}
-		oparser -> deleteAll();
-		delete oparser;
-		parser -> deleteAll();
-		delete parser;
-		delete plan;
+			//	myRequirements -> check(firstSem);
+
+	//	(parser -> getRequirements()) -> printAdjVec();
+		/*
+		unordered_map<string, offerings*> offersMap;
+		offeringsParser *offers = new offeringsParser(argv[2]);
+		offersMap = offers -> getMap();
+		
+		auto search = offersMap.find("AN301");
+		if(search != offersMap.end()){
+			cout << "Found " << search -> first << " : " << search -> second -> getCredits();
+		}
+
+		vector<string> plannedTest;
+		vector<string>::iterator iter;
+		planned *plan = new planned(argv[3]);
+		plannedTest = plan -> getF19();
+		cout << endl << endl;
+
+		for(iter = plannedTest.begin(); iter != plannedTest.end(); iter++){
+			cout << *iter << ", "; 
+		}
+		cout << endl;
+		*/
 		
 	}
 	return 0;
