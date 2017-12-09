@@ -3,6 +3,7 @@
 #include <fstream>
 #include <sys/stat.h>
 #include <vector>
+#include <sstream>
 #include "offeringsObj.h"
 #include "offeringsParser.h"
 #include "requirementsObj.h"
@@ -23,15 +24,21 @@ offeringsParser::offeringsParser(string fileName, requirements *myRequirements){
 	vector<string> addAdj;
 	while(getline(file, str)){
 		found = false;
-		offerings *offered = new offerings(str);
-		offeringsMap.insert(make_pair(offered -> getClass(), offered));	
+		string temp = str;
+		string temp1;
+		stringstream s(temp);
+		s >> temp1;
+		if(offeringsMap.find(temp1) == offeringsMap.end()){	
+			offerings *offered = new offerings(str);
+			offeringsMap.insert(make_pair(offered -> getClass(), offered));	
+				
+			addAdj.push_back("COURSE");
+			addAdj.push_back(offered -> getClass());
+			addAdj.push_back(offered -> getTags());
 			
-		addAdj.push_back("COURSE");
-		addAdj.push_back(offered -> getClass());
-		addAdj.push_back(offered -> getTags());
-		
-		myRequirements -> addOffs(addAdj);
-		addAdj.clear();
+			myRequirements -> addOffs(addAdj);
+			addAdj.clear();
+		}
 	}
 }
 
